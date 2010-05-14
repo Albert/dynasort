@@ -1,0 +1,102 @@
+/*
+Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.3.0
+*/
+/*reset.css*/body{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup,sub{line-height:-1px;vertical-align:text-top;}sub{vertical-align:text-bottom;}input, textarea, select{font-family:inherit;font-size:inherit;font-weight:inherit;}
+/*fonts.css*/body {font:13px/1.22 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;}table {font-size:inherit;font:100%;}pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:99%;}
+
+body {
+  line-height: 1.538;
+  color: #5b5b5b;
+  text-align: center;
+}
+
+h1,h2,h3,h4,h5,h6,
+strong, strong *, * strong  { font-weight: bold; }
+em, em *, * em              { font-style: italic; }
+
+img { background-color: transparent; }
+
+.inline { display: inline; }
+.left { float: left; }
+.right { float: right; }
+.clear { clear: both; }
+
+#wrapper,
+#header .wrapper,
+#footer .wrapper {
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* list styles
+----------------------------------------------------------------------------------*/
+
+.disc,
+.decimal,
+.upper_roman,
+.lower_roman,
+.upper_alpha,
+.lower_alpha,
+.no_style {
+  margin: 1em;
+  margin-left: 2em;
+}   
+
+.disc         li { list-style-type: disc;        }
+.decimal      li { list-style-type: decimal;     }
+.upper_roman  li { list-style-type: upper-roman; }
+.lower_roman  li { list-style-type: lower-roman; }
+.upper_alpha  li { list-style-type: upper-alpha; }
+.lower_alpha  li { list-style-type: lower-alpha; }
+.no_style     li { list-style-type: none; }
+
+.disc li,
+.no_style li,
+.decimal li,
+.upper_roman li,
+.lower_roman li,
+.upper_alpha li,
+.lower_alpha li {
+  text-align: left !important;
+  margin-bottom: 5px;
+}
+
+#wrapper,
+#header .wrapper,
+#footer .wrapper {
+  width: 960px;
+}
+
+/* clearfix
+----------------------------------------------------------------------*/
+
+.clearfix:after,
+#wrapper:after,
+.wrapper:after  {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  height: 0;
+}
+
+.clearfix,
+#wrapper,
+.wrapper {
+  display: inline-block;
+}
+
+html[xmlns] .clearfix,
+html[xmlns] #wrapper,
+html[xmlns] .wrapper {
+  display: block;
+}
+
+* html .clearfix,
+* html #wrapper,
+* html .wrapper {
+  height: 1%;
+}

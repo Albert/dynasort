@@ -1,20 +1,47 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <title>Dynasort</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+
+  <link href="base.css" media="screen" rel="stylesheet" type="text/css" />
   <link href="style.css" media="screen" rel="stylesheet" type="text/css" />
+  <!--[if IE 8]>
+    <%#= stylesheet_link_tag 'public_ie8' %>
+  <![endif]-->
+  <!--[if IE 7]>
+    <%#= stylesheet_link_tag 'public_ie7' %>
+  <![endif]-->
+  <!--[if IE 6]>
+    <%#= stylesheet_link_tag 'public_ie6' %>
+  <![endif]-->
 </head>
+
 <body>
-
-  <div id="items"></div>
-
-  <div id="control_pad">
-    <a href="#" id="bn_sort_by_name_and_length">Sort by Place name and Name Length</a>
-    <a href="#" id="bn_sort_by_rating_and_distance">Sort by Rating and Distance</a>
+  <div id="header">
+    <div class="wrapper">
+    </div>
   </div>
+  <div id="wrapper">
+    <div id="graph">
+      <div id="y_axis">y axis</div>
+      <div id="x_axis">x axis</div>
+    </div>
 
-  <script src="jquery.js" type="text/javascript"></script>
-  <script src="application.js" type="text/javascript"></script>
+    <div id="control_pad">
+      <a href="#" id="bn_sort_by_name_and_length">Sort by Place name and Name Length</a>
+      <a href="#" id="bn_sort_by_rating_and_distance">Sort by Rating and Distance</a>
+    </div>
 
+    <script src="jquery.js" type="text/javascript"></script>
+    <script src="application.js" type="text/javascript"></script>
+
+  </div>
+  <div id="footer">
+    <div class="wrapper">
+    </div>
+  </div>
 </body>
 </html>
