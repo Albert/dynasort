@@ -1,0 +1,21 @@
+#wrapper {
+  background-color: #cbf7c4;
+}
+
+#graph {
+  position: relative;
+  background-color: #fff;
+  width: 600px;
+  height: 400px;
+  float: right;
+  margin: 20px 40px;
+}
+
+.item {
+  position: absolute;
+}
+
+#control_pad {
+  float: left;
+  width: 280px;
+}
