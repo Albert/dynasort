@@ -39,48 +39,105 @@ $.getJSON(
 );
 
 $('input:radio').change(function(){
-  // define parameters
   var yLabel = $('#y_axis_selector input:radio:checked').val();
   var xLabel = $('#x_axis_selector input:radio:checked').val();
 
-  switch(xLabel)
-  {
-  case "name":
-    var values = [];
-    $.each(dataset, function(i,item){
-      values.push(parseFloat(item.Title.toUpperCase().charCodeAt()));
-    });
-    maxValue = values.sort(function(a,b){return a - b}).slice(-1);
-    minValue = values.sort(function(a,b){return a - b}).slice(0,1);
 
-    $.each(dataset, function(i,item){
-      itemLeftInPix = ((item.Title.toUpperCase().charCodeAt()) - minValue) * 600 / (maxValue - minValue);
-      $('#item_' + i).animate({'left' : itemLeftInPix}, {duration: 'slow', queue: false} );
-    });
+/*
 
-    $('#x_axis .lower_limit').html(String.fromCharCode(minValue) + '');
-    $('#x_axis .upper_limit').html(String.fromCharCode(maxValue) + '');
+find all values
+determine the min and max limits
+Post lower and upper limits
 
-    break;
-  case "name_length":
-    var values = [];
-    $.each(dataset, function(i,item){
-      values.push(parseFloat(item.Title.length));
-    });
-    maxValue = values.sort(function(a,b){return a - b}).slice(-1);
-    minValue = values.sort(function(a,b){return a - b}).slice(0,1);
+for each value
+determine the position & place
 
-    $.each(dataset, function(i,item){
-      itemLeftInPix = ((item.Title.length) - minValue) * 600 / (maxValue - minValue);
-      $('#item_' + i).animate({'left' : itemLeftInPix}, {duration: 'slow', queue: false} );
-    });
+*/
 
-    $('#x_axis .lower_limit').html(minValue + '');
-    $('#x_axis .upper_limit').html(maxValue + '');
+  var values = [];
+  $.each(dataset, function(i,item){
+    switch(xLabel){
+      case "name":
+        values.push(parseFloat(item.Title.toUpperCase().charCodeAt()));
+        break;
+      case "name_length":
+        values.push(parseFloat(item.Title.length));
+        break;
+      default:
+    }
+  });
 
-    break;
-  default:
+  maxValue = values.sort(function(a,b){return a - b}).slice(-1);
+  minValue = values.sort(function(a,b){return a - b}).slice(0,1);
+
+  switch(xLabel){
+    case "name":
+      minValueLabel = String.fromCharCode(minValue) + '';
+      maxValueLabel = String.fromCharCode(maxValue) + '';
+      break;
+    default:
+      minValueLabel = minValue + '';
+      maxValueLabel = maxValue + '';
   }
+
+  $('#x_axis .lower_limit').html(minValueLabel);
+  $('#x_axis .upper_limit').html(maxValueLabel);
+
+  $.each(dataset, function(i,item){
+    switch(xLabel){
+      case "name":
+        itemLeftInPix = ((item.Title.toUpperCase().charCodeAt()) - minValue) * 600 / (maxValue - minValue);
+        break;
+      case "name_length":
+        itemLeftInPix = ((item.Title.length) - minValue) * 600 / (maxValue - minValue);
+        break;
+      default:
+    }
+    $('#item_' + i).animate({'left' : itemLeftInPix}, {duration: 'slow', queue: false} );
+  });
+
+
+
+
+  // switch(xLabel)
+  // {
+  // case "name":
+  //   var values = [];
+  //   $.each(dataset, function(i,item){
+  //     values.push(parseFloat(item.Title.toUpperCase().charCodeAt()));
+  //   });
+  //   maxValue = values.sort(function(a,b){return a - b}).slice(-1);
+  //   minValue = values.sort(function(a,b){return a - b}).slice(0,1);
+  // 
+  //   $.each(dataset, function(i,item){
+  //     itemLeftInPix = ((item.Title.toUpperCase().charCodeAt()) - minValue) * 600 / (maxValue - minValue);
+  //     $('#item_' + i).animate({'left' : itemLeftInPix}, {duration: 'slow', queue: false} );
+  //   });
+  // 
+  //   $('#x_axis .lower_limit').html(String.fromCharCode(minValue) + '');
+  //   $('#x_axis .upper_limit').html(String.fromCharCode(maxValue) + '');
+  // 
+  //   break;
+  // case "name_length":
+  //   var values = [];
+  //   $.each(dataset, function(i,item){
+  //     values.push(parseFloat(item.Title.length));
+  //   });
+  //   maxValue = values.sort(function(a,b){return a - b}).slice(-1);
+  //   minValue = values.sort(function(a,b){return a - b}).slice(0,1);
+  // 
+  //   $.each(dataset, function(i,item){
+  //     itemLeftInPix = ((item.Title.length) - minValue) * 600 / (maxValue - minValue);
+  //     $('#item_' + i).animate({'left' : itemLeftInPix}, {duration: 'slow', queue: false} );
+  //   });
+  // 
+  //   $('#x_axis .lower_limit').html(minValue + '');
+  //   $('#x_axis .upper_limit').html(maxValue + '');
+  // 
+  //   break;
+  // default:
+  // }
+
 });
 
 $(document).ready(function () {
