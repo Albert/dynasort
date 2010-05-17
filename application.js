@@ -39,16 +39,49 @@ $.getJSON(
 );
 
 $('input:radio').change(function(){
-  updateGraph();
-});
-
-function updateGraph() {
+  // define parameters
   var yLabel = $('#y_axis_selector input:radio:checked').val();
   var xLabel = $('#x_axis_selector input:radio:checked').val();
-  updateAxis('x', xLabel);
-  updateAxis('y', yLabel);
-  plotPoints(xLabel, yLabel);
-}
+
+  switch(xLabel)
+  {
+  case "name":
+    var values = [];
+    $.each(dataset, function(i,item){
+      values.push(parseFloat(item.Title.toUpperCase().charCodeAt()));
+    });
+    maxValue = values.sort(function(a,b){return a - b}).slice(-1);
+    minValue = values.sort(function(a,b){return a - b}).slice(0,1);
+
+    $.each(dataset, function(i,item){
+      itemLeftInPix = ((item.Title.toUpperCase().charCodeAt()) - minValue) * 600 / (maxValue - minValue);
+      $('#item_' + i).animate({'left' : itemLeftInPix}, {duration: 'slow', queue: false} );
+    });
+
+    $('#x_axis .lower_limit').html(String.fromCharCode(minValue) + '');
+    $('#x_axis .upper_limit').html(String.fromCharCode(maxValue) + '');
+
+    break;
+  case "name_length":
+    var values = [];
+    $.each(dataset, function(i,item){
+      values.push(parseFloat(item.Title.length));
+    });
+    maxValue = values.sort(function(a,b){return a - b}).slice(-1);
+    minValue = values.sort(function(a,b){return a - b}).slice(0,1);
+
+    $.each(dataset, function(i,item){
+      itemLeftInPix = ((item.Title.length) - minValue) * 600 / (maxValue - minValue);
+      $('#item_' + i).animate({'left' : itemLeftInPix}, {duration: 'slow', queue: false} );
+    });
+
+    $('#x_axis .lower_limit').html(minValue + '');
+    $('#x_axis .upper_limit').html(maxValue + '');
+
+    break;
+  default:
+  }
+});
 
 $(document).ready(function () {
   $('#bn_sort_by_name_and_length').click(function() {
