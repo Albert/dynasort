@@ -11,6 +11,16 @@
   margin: 20px 40px;
 }
 
+#y_axis .lower_limit,
+#y_axis .upper_limit,
+#x_axis .lower_limit,
+#x_axis .upper_limit { position: absolute; }
+
+#y_axis .lower_limit { left: -10px; bottom: 0; }
+#y_axis .upper_limit { left: -10px; top 0; }
+#x_axis .lower_limit { left:   0px; bottom: -20px; }
+#x_axis .upper_limit { right:  0px; bottom: -20px;}
+
 .item {
   position: absolute;
 }

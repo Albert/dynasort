@@ -26,13 +26,11 @@ var dataset = "";
 var graphHeight = $('#graph').height();
 var graphWidth = $('#graph').width();
 
-/* does this need a 'dynasortNum' appended: isn't the item index good enough? */
 $.getJSON(
   "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search%20where%20query%3D%22sushi%22%20and%20location%3D%22san%20francisco,%20ca%22&format=json&callback=",
   function(data){
     dataset = data.query.results.Result;
     $.each(dataset, function(i,item){
-      item.dynasortNum = i;
       var rowContainer = $("<div class='item' id='item_" + i + "' />");
       rowContainer.appendTo("#graph");
       $("<div/>").html(item.Title).appendTo("#item_" + i);
@@ -40,18 +38,26 @@ $.getJSON(
   }
 );
 
+$('input:radio').change(function(){
+  updateGraph();
+});
+
+function updateGraph() {
+  var yLabel = $('#y_axis_selector input:radio:checked').val();
+  var xLabel = $('#x_axis_selector input:radio:checked').val();
+  updateAxis('x', xLabel);
+  updateAxis('y', yLabel);
+  plotPoints(xLabel, yLabel);
+}
+
 $(document).ready(function () {
   $('#bn_sort_by_name_and_length').click(function() {
-    $.each(dataset, function(i,item){
-      sortByNameAndLength();
-    });
+    sortByNameAndLength();
     return false;
   });
 
   $('#bn_sort_by_rating_and_distance').click(function() {
-    $.each(dataset, function(i,item){
-      sortByRatingAndDistance();
-    });
+    sortByRatingAndDistance();
     return false;
   });
 });
@@ -61,8 +67,8 @@ function sortByNameAndLength() {
     itemLeft = item.Title.length * 30;
     itemLeftInPix = itemLeft + "px";
     itemBottom = item.Title.toUpperCase().charCodeAt();
-    itemBottomInPix = itemBottom + "px";
-    $('#item_' + i).animate({'left' : itemLeftInPix, 'bottom' : itemBottomInPix}, {duration: 'slow', queue: false} );
+    itemTopInPix = itemBottom + "px";
+    $('#item_' + i).animate({'left' : itemLeftInPix, 'top' : itemTopInPix}, {duration: 'slow', queue: false} );
   });
 }
 
@@ -90,10 +96,14 @@ function sortByRatingAndDistance() {
     //    (original_dist - min_distance) / (maxDistance - min_distance) = pix / 600
     //    (original_dist - min_distance) * 600 / (maxDistance - min_distance) = pix
     itemLeftInPix = ((item.Distance - minDistance) * 600 / (maxDistance - minDistance));
-    itemBottomInPix = ((item.Rating.AverageRating - minRating) * 400 / (maxRating - minRating))
-    $('#item_' + i).animate({'left' : itemLeftInPix, 'bottom' : itemBottomInPix}, {duration: 'slow', queue: false} );
+    itemTopInPix = ((item.Rating.AverageRating - minRating) * 400 / (maxRating - minRating))
+    $('#item_' + i).animate({'left' : itemLeftInPix, 'top' : itemTopInPix}, {duration: 'slow', queue: false} );
   });
 
+  $('#x_axis .lower_limit').html(minDistance + '');
+  $('#x_axis .upper_limit').html(maxDistance + '');
+  $('#y_axis .lower_limit').html(minRating + '');
+  $('#y_axis .upper_limit').html(maxRating + '');
 
   // distancesPix = $.map(distances, function(a){
   //   return ((a - minDistance) * 600 / (maxDistance - minDistance));
@@ -104,8 +114,8 @@ function sortByRatingAndDistance() {
   //   itemLeftInPix = itemLeft + "px";
   // 
   //   itemBottom = item.Rating.AverageRating * 100;
-  //   itemBottomInPix = itemBottom + "px";
+  //   itemTopInPix = itemBottom + "px";
   // 
-  //   $('#item_' + i).animate({'left' : itemLeftInPix, 'bottom' : itemBottomInPix}, {duration: 'slow', queue: false} );
+  //   $('#item_' + i).animate({'left' : itemLeftInPix, 'bottom' : itemTopInPix}, {duration: 'slow', queue: false} );
   // });
 }

@@ -26,7 +26,7 @@
   </div>
   <div id="wrapper">
     <div id="control_pad">
-      <div id="y_axis">
+      <div id="y_axis_selector">
         <h2>Y Axis</h2>
         <ul class="label">
           <li>
@@ -47,7 +47,7 @@
           </li>
         </ul>
       </div>
-      <div id="x_axis">
+      <div id="x_axis_selector">
         <h2>X Axis</h2>
         <ul class="label">
           <li>
@@ -72,7 +72,16 @@
       <a href="#" id="bn_sort_by_rating_and_distance">Sort by Rating and Distance</a>
     </div>
 
-    <div id="graph"></div>
+    <div id="graph">
+      <ul id="y_axis">
+        <li class="lower_limit"></li>
+        <li class="upper_limit"></li>
+      </ul>
+      <ul id="x_axis">
+        <li class="lower_limit"></li>
+        <li class="upper_limit"></li>
+      </ul>
+    </div>
 
     <script src="jquery.js" type="text/javascript"></script>
     <script src="application.js" type="text/javascript"></script>
