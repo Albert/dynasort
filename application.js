@@ -42,33 +42,82 @@ $('input:radio').change(function(){
   var yLabel = $('#y_axis_selector input:radio:checked').val();
   var xLabel = $('#x_axis_selector input:radio:checked').val();
 
-
-/*
-
-find all values
-determine the min and max limits
-Post lower and upper limits
-
-for each value
-determine the position & place
-
-*/
-
-  var values = [];
+  var yValues = [];
   $.each(dataset, function(i,item){
-    switch(xLabel){
+    switch(yLabel){
       case "name":
-        values.push(parseFloat(item.Title.toUpperCase().charCodeAt()));
+        yValues.push(parseFloat(item.Title.toUpperCase().charCodeAt()));
         break;
       case "name_length":
-        values.push(parseFloat(item.Title.length));
+        yValues.push(parseFloat(item.Title.length));
+        break;
+      case "rating":
+        yValues.push(parseFloat(item.Rating.AverageRating));
+        break;
+      case "distance":
+        yValues.push(parseFloat(item.Distance));
         break;
       default:
     }
   });
 
-  maxValue = values.sort(function(a,b){return a - b}).slice(-1);
-  minValue = values.sort(function(a,b){return a - b}).slice(0,1);
+  maxValue = yValues.sort(function(a,b){return a - b}).slice(-1);
+  minValue = yValues.sort(function(a,b){return a - b}).slice(0,1);
+
+  switch(yLabel){
+    case "name":
+      minValueLabel = String.fromCharCode(minValue) + '';
+      maxValueLabel = String.fromCharCode(maxValue) + '';
+      break;
+    default:
+      minValueLabel = minValue + '';
+      maxValueLabel = maxValue + '';
+  }
+
+  $('#y_axis .lower_limit').html(minValueLabel);
+  $('#y_axis .upper_limit').html(maxValueLabel);
+
+  $.each(dataset, function(i,item){
+    switch(yLabel){
+      case "name":
+        itemBottomInPix = ((item.Title.toUpperCase().charCodeAt()) - minValue) * 400 / (maxValue - minValue);
+        break;
+      case "name_length":
+        itemBottomInPix = ((item.Title.length) - minValue) * 400 / (maxValue - minValue);
+        break;
+      case "rating":
+        itemBottomInPix = ((item.Rating.AverageRating) - minValue) * 400 / (maxValue - minValue);
+        break;
+      case "distance":
+        itemBottomInPix = ((item.Distance) - minValue) * 400 / (maxValue - minValue);
+        break;
+      default:
+    }
+    $('#item_' + i).animate({'bottom' : itemBottomInPix}, {duration: 'slow', queue: false} );
+  });
+
+
+  var xValues = [];
+  $.each(dataset, function(i,item){
+    switch(xLabel){
+      case "name":
+        xValues.push(parseFloat(item.Title.toUpperCase().charCodeAt()));
+        break;
+      case "name_length":
+        xValues.push(parseFloat(item.Title.length));
+        break;
+      case "rating":
+        xValues.push(parseFloat(item.Rating.AverageRating));
+        break;
+      case "distance":
+        xValues.push(parseFloat(item.Distance));
+        break;
+      default:
+    }
+  });
+
+  maxValue = xValues.sort(function(a,b){return a - b}).slice(-1);
+  minValue = xValues.sort(function(a,b){return a - b}).slice(0,1);
 
   switch(xLabel){
     case "name":
@@ -90,6 +139,12 @@ determine the position & place
         break;
       case "name_length":
         itemLeftInPix = ((item.Title.length) - minValue) * 600 / (maxValue - minValue);
+        break;
+      case "rating":
+        itemLeftInPix = ((item.Rating.AverageRating) - minValue) * 400 / (maxValue - minValue);
+        break;
+      case "distance":
+        itemLeftInPix = ((item.Distance) - minValue) * 400 / (maxValue - minValue);
         break;
       default:
     }
