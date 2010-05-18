@@ -1,27 +1,3 @@
-/*
-yql statement:
-select * from local.search where query="sushi" and location="san francisco, ca"
-
-Objects
-
-Dataset[data]
-  datatype (support for string, numerical value, categories)
-x axis
-y axis
-radios
-axis bounds
-
-
-Description:
-left side is the y axis
-bottom is the x axis
-graph top right
-graph 400 tall, 600 wide
-
-
-
-*/
-
 var dataset = "";
 var graphHeight = $('#graph').height();
 var graphWidth = $('#graph').width();
@@ -151,48 +127,6 @@ $('input:radio').change(function(){
     $('#item_' + i).animate({'left' : itemLeftInPix}, {duration: 'slow', queue: false} );
   });
 
-
-
-
-  // switch(xLabel)
-  // {
-  // case "name":
-  //   var values = [];
-  //   $.each(dataset, function(i,item){
-  //     values.push(parseFloat(item.Title.toUpperCase().charCodeAt()));
-  //   });
-  //   maxValue = values.sort(function(a,b){return a - b}).slice(-1);
-  //   minValue = values.sort(function(a,b){return a - b}).slice(0,1);
-  // 
-  //   $.each(dataset, function(i,item){
-  //     itemLeftInPix = ((item.Title.toUpperCase().charCodeAt()) - minValue) * 600 / (maxValue - minValue);
-  //     $('#item_' + i).animate({'left' : itemLeftInPix}, {duration: 'slow', queue: false} );
-  //   });
-  // 
-  //   $('#x_axis .lower_limit').html(String.fromCharCode(minValue) + '');
-  //   $('#x_axis .upper_limit').html(String.fromCharCode(maxValue) + '');
-  // 
-  //   break;
-  // case "name_length":
-  //   var values = [];
-  //   $.each(dataset, function(i,item){
-  //     values.push(parseFloat(item.Title.length));
-  //   });
-  //   maxValue = values.sort(function(a,b){return a - b}).slice(-1);
-  //   minValue = values.sort(function(a,b){return a - b}).slice(0,1);
-  // 
-  //   $.each(dataset, function(i,item){
-  //     itemLeftInPix = ((item.Title.length) - minValue) * 600 / (maxValue - minValue);
-  //     $('#item_' + i).animate({'left' : itemLeftInPix}, {duration: 'slow', queue: false} );
-  //   });
-  // 
-  //   $('#x_axis .lower_limit').html(minValue + '');
-  //   $('#x_axis .upper_limit').html(maxValue + '');
-  // 
-  //   break;
-  // default:
-  // }
-
 });
 
 $(document).ready(function () {
@@ -249,18 +183,4 @@ function sortByRatingAndDistance() {
   $('#x_axis .upper_limit').html(maxDistance + '');
   $('#y_axis .lower_limit').html(minRating + '');
   $('#y_axis .upper_limit').html(maxRating + '');
-
-  // distancesPix = $.map(distances, function(a){
-  //   return ((a - minDistance) * 600 / (maxDistance - minDistance));
-  // });
-  // $.each(dataset, function(i,item){
-  //   
-  //   itemLeft = item.Distance * 100;
-  //   itemLeftInPix = itemLeft + "px";
-  // 
-  //   itemBottom = item.Rating.AverageRating * 100;
-  //   itemTopInPix = itemBottom + "px";
-  // 
-  //   $('#item_' + i).animate({'left' : itemLeftInPix, 'bottom' : itemTopInPix}, {duration: 'slow', queue: false} );
-  // });
 }
