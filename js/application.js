@@ -30,7 +30,9 @@ $('input:radio').change(function(){
         yValues.push(parseFloat(item.Title.length));
         break;
       case "rating":
-        yValues.push(parseFloat(item.Rating.AverageRating));
+        if(!(item.Rating.AverageRating == "NaN")) {
+          yValues.push(parseFloat(item.Rating.AverageRating));
+        }
         break;
       case "distance":
         yValues.push(parseFloat(item.Distance));
@@ -64,7 +66,11 @@ $('input:radio').change(function(){
         itemBottomInPix = ((item.Title.length) - minValue) * 400 / (maxValue - minValue);
         break;
       case "rating":
-        itemBottomInPix = ((item.Rating.AverageRating) - minValue) * 400 / (maxValue - minValue);
+        if(item.Rating.AverageRating == "NaN") {
+          itemBottomInPix = 10000;
+        } else {
+          itemBottomInPix = ((item.Rating.AverageRating) - minValue) * 400 / (maxValue - minValue);
+        }
         break;
       case "distance":
         itemBottomInPix = ((item.Distance) - minValue) * 400 / (maxValue - minValue);
@@ -85,7 +91,9 @@ $('input:radio').change(function(){
         xValues.push(parseFloat(item.Title.length));
         break;
       case "rating":
-        xValues.push(parseFloat(item.Rating.AverageRating));
+        if(!(item.Rating.AverageRating == "NaN")) {
+          xValues.push(parseFloat(item.Rating.AverageRating));
+        }
         break;
       case "distance":
         xValues.push(parseFloat(item.Distance));
@@ -119,10 +127,14 @@ $('input:radio').change(function(){
         itemLeftInPix = ((item.Title.length) - minValue) * 600 / (maxValue - minValue);
         break;
       case "rating":
-        itemLeftInPix = ((item.Rating.AverageRating) - minValue) * 400 / (maxValue - minValue);
+        if(item.Rating.AverageRating == "NaN") {
+          itemLeftInPix = 10000;
+        } else {
+          itemLeftInPix = ((item.Rating.AverageRating) - minValue) * 600 / (maxValue - minValue);
+        }
         break;
       case "distance":
-        itemLeftInPix = ((item.Distance) - minValue) * 400 / (maxValue - minValue);
+        itemLeftInPix = ((item.Distance) - minValue) * 600 / (maxValue - minValue);
         break;
       default:
     }
