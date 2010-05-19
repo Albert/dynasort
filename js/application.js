@@ -34,6 +34,9 @@ $('input:radio').change(function(){
           yValues.push(parseFloat(item.Rating.AverageRating));
         }
         break;
+      case "total_ratings":
+        yValues.push(parseFloat(item.Rating.TotalRatings));
+        break;
       case "distance":
         yValues.push(parseFloat(item.Distance));
         break;
@@ -72,6 +75,9 @@ $('input:radio').change(function(){
           itemBottomInPix = ((item.Rating.AverageRating) - minValue) * 400 / (maxValue - minValue);
         }
         break;
+      case "total_ratings":
+        itemBottomInPix = ((item.Rating.TotalRatings) - minValue) * 400 / (maxValue - minValue);
+        break;
       case "distance":
         itemBottomInPix = ((item.Distance) - minValue) * 400 / (maxValue - minValue);
         break;
@@ -94,6 +100,9 @@ $('input:radio').change(function(){
         if(!(item.Rating.AverageRating == "NaN")) {
           xValues.push(parseFloat(item.Rating.AverageRating));
         }
+        break;
+      case "total_ratings":
+        xValues.push(parseFloat(item.Rating.TotalRatings));
         break;
       case "distance":
         xValues.push(parseFloat(item.Distance));
@@ -132,6 +141,9 @@ $('input:radio').change(function(){
         } else {
           itemLeftInPix = ((item.Rating.AverageRating) - minValue) * 600 / (maxValue - minValue);
         }
+        break;
+      case "total_ratings":
+        itemLeftInPix = ((item.Rating.TotalRatings) - minValue) * 600 / (maxValue - minValue);
         break;
       case "distance":
         itemLeftInPix = ((item.Distance) - minValue) * 600 / (maxValue - minValue);
