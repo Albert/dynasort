@@ -4,7 +4,7 @@ var graphWidth = $('#graph').width();
 
 $.getJSON(
 //"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search%20where%20query%3D%22sushi%22%20and%20location%3D%22san%20francisco,%20ca%22&format=json&callback=",
-  "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search(0)%20where%20query%3D%22coffee%22%20and%20location%3D%22New%20york%2C%20ny%22&format=json&diagnostics=true&callback=",
+  "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search(0)%20where%20query%3D%22pizza%22%20and%20location%3D%22New%20york%2C%20ny%22&format=json&diagnostics=true&callback=",
 
   function(data){
     dataset = data.query.results.Result;
