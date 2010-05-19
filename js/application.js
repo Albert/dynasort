@@ -29,7 +29,7 @@ $('input:radio').change(function(){
       case "name_length":
         yValues.push(parseFloat(item.Title.length));
         break;
-      case "rating":
+      case "average_rating":
         if(!(item.Rating.AverageRating == "NaN")) {
           yValues.push(parseFloat(item.Rating.AverageRating));
         }
@@ -65,7 +65,7 @@ $('input:radio').change(function(){
       case "name_length":
         itemBottomInPix = ((item.Title.length) - minValue) * 400 / (maxValue - minValue);
         break;
-      case "rating":
+      case "average_rating":
         if(item.Rating.AverageRating == "NaN") {
           itemBottomInPix = 10000;
         } else {
@@ -90,7 +90,7 @@ $('input:radio').change(function(){
       case "name_length":
         xValues.push(parseFloat(item.Title.length));
         break;
-      case "rating":
+      case "average_rating":
         if(!(item.Rating.AverageRating == "NaN")) {
           xValues.push(parseFloat(item.Rating.AverageRating));
         }
@@ -126,7 +126,7 @@ $('input:radio').change(function(){
       case "name_length":
         itemLeftInPix = ((item.Title.length) - minValue) * 600 / (maxValue - minValue);
         break;
-      case "rating":
+      case "average_rating":
         if(item.Rating.AverageRating == "NaN") {
           itemLeftInPix = 10000;
         } else {
