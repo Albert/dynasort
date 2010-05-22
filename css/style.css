@@ -1,3 +1,4 @@
+body,
 #wrapper {
   background-color: #cbf7c4;
 }
@@ -5,10 +6,8 @@
 #graph {
   position: relative;
   background-color: #fff;
-  width: 600px;
-  height: 400px;
   float: right;
-  margin: 20px 40px;
+  margin: 0;
 }
 
 #y_axis .lower_limit,
@@ -16,8 +15,8 @@
 #x_axis .lower_limit,
 #x_axis .upper_limit { position: absolute; }
 
-#y_axis .lower_limit { right: 605px; bottom: 0; }
-#y_axis .upper_limit { right: 605px; top: 0; }
+#y_axis .lower_limit { bottom: 0; }
+#y_axis .upper_limit { top: 0; }
 #x_axis .lower_limit { left:   0px; bottom: -20px; }
 #x_axis .upper_limit { right:  0px; bottom: -20px;}
 
