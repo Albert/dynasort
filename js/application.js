@@ -5,7 +5,6 @@ draw gragh
 select axes
 apply filters
 
-
 Draw graph on:
 Json loading completion
 On window resize
@@ -13,7 +12,7 @@ On axis selection
 On filter
 */
 
-var dataset = "";
+var dataset;
 var pageHeight = $(window).height();
 var pageWidth = $(window).width();
 var graphHeight;
@@ -36,6 +35,7 @@ $(document).ready(function(){
       $.each(dataset, function(i,item){
         var rowContainer = $("<div class='item' id='item_" + i + "' />");
         rowContainer.appendTo("#graph");
+        item.visible = true;
         $("<div/>").html(item.Title).appendTo("#item_" + i);
       });
       drawGraph();
@@ -45,18 +45,53 @@ $(document).ready(function(){
   $('input:radio').change(function(){
     drawGraph();
   });
+
   /* filters */
   
-	$("#total_ratings_filter_slider").slider({
+	$(".filter_slider").slider({
 		range: true,
 		min: 0,
 		max: 150,
 		values: [0, 150],
 		slide: function(event, ui) {
-			$("#amount").val(ui.values[0] + ', ' + ui.values[1]);
+		  slider_label = $(this).attr('id').replace("_slider", "");
+			$("#" + slider_label + "_values").val(ui.values[0] + ', ' + ui.values[1]);
+		},
+		change: function() {
+		  slider_label = $(this).attr('id').replace("_slider", "");
+  	  lowerLimit = $("#" + slider_label + "_slider").slider("values", 0);
+  	  upperLimit = $("#" + slider_label + "_slider").slider("values", 1);
+      switch(slider_label){
+        case "name":
+          $.each(dataset, function(i,item){
+            item.visible = (lowerLimit < item.Title.toUpperCase().charCodeAt() && item.Title.toUpperCase().charCodeAt() < upperLimit) ? true : false;
+          });
+          break;
+        case "name_length":
+          $.each(dataset, function(i,item){
+            item.visible = (lowerLimit < item.Title.length && item.Title.length < upperLimit) ? true : false;
+          });
+          break;
+        case "average_rating":
+          $.each(dataset, function(i,item){
+            item.visible = (lowerLimit < item.Rating.AverageRating && item.Rating.AverageRating < upperLimit) ? true : false;
+          });
+          break;
+        case "total_ratings":
+          $.each(dataset, function(i,item){
+            item.visible = (lowerLimit < item.Rating.TotalRatings && item.Rating.TotalRatings < upperLimit) ? true : false;
+          });
+          break;
+        case "distance":
+          $.each(dataset, function(i,item){
+            item.visible = (lowerLimit < item.Distance && item.Distance < upperLimit) ? true : false;
+          });
+          break;
+        default:
+      }
+      drawGraph();
 		}
 	});
-	$("#amount").val($("#total_ratings_filter_slider").slider("values", 0) + ', ' + $("#total_ratings_filter_slider").slider("values", 1));
 });
 
 function drawGraph() {
@@ -74,25 +109,27 @@ function drawGraph() {
 function animatePointsByAxis(label, axisID) {
   var axisValues = [];
   $.each(dataset, function(i,item){
-    switch(label){
-      case "name":
-        axisValues.push(parseFloat(item.Title.toUpperCase().charCodeAt()));
-        break;
-      case "name_length":
-        axisValues.push(parseFloat(item.Title.length));
-        break;
-      case "average_rating":
-        if(!(item.Rating.AverageRating == "NaN")) {
-          axisValues.push(parseFloat(item.Rating.AverageRating));
-        }
-        break;
-      case "total_ratings":
-        axisValues.push(parseFloat(item.Rating.TotalRatings));
-        break;
-      case "distance":
-        axisValues.push(parseFloat(item.Distance));
-        break;
-      default:
+    if (item.visible) {
+      switch(label){
+        case "name":
+          axisValues.push(parseFloat(item.Title.toUpperCase().charCodeAt()));
+          break;
+        case "name_length":
+          axisValues.push(parseFloat(item.Title.length));
+          break;
+        case "average_rating":
+          if(!(item.Rating.AverageRating == "NaN")) {
+            axisValues.push(parseFloat(item.Rating.AverageRating));
+          }
+          break;
+        case "total_ratings":
+          axisValues.push(parseFloat(item.Rating.TotalRatings));
+          break;
+        case "distance":
+          axisValues.push(parseFloat(item.Distance));
+          break;
+        default:
+      }
     }
   });
   minValue = axisValues.sort(function(a,b){return a - b}).slice(0,1);
@@ -117,32 +154,36 @@ function animatePointsByAxis(label, axisID) {
   }
 
   $.each(dataset, function(i,item){
-    switch(label){
-      case "name":
-        itemOffsetInPix = ((item.Title.toUpperCase().charCodeAt()) - minValue) * fullAxisSize / (maxValue - minValue);
-        break;
-      case "name_length":
-        itemOffsetInPix = ((item.Title.length) - minValue) * fullAxisSize / (maxValue - minValue);
-        break;
-      case "average_rating":
-        if(item.Rating.AverageRating == "NaN") {
-          itemOffsetInPix = 10000;
-        } else {
-          itemOffsetInPix = ((item.Rating.AverageRating) - minValue) * fullAxisSize / (maxValue - minValue);
-        }
-        break;
-      case "total_ratings":
-        itemOffsetInPix = ((item.Rating.TotalRatings) - minValue) * fullAxisSize / (maxValue - minValue);
-        break;
-      case "distance":
-        itemOffsetInPix = ((item.Distance) - minValue) * fullAxisSize / (maxValue - minValue);
-        break;
-      default:
-    }
-    if (axisID == "y_axis") {
-      $('#item_' + i).animate({'bottom' : itemOffsetInPix}, {duration: 'slow', queue: false} );
+    if (item.visible) {
+      switch(label){
+        case "name":
+          itemOffsetInPix = ((item.Title.toUpperCase().charCodeAt()) - minValue) * fullAxisSize / (maxValue - minValue);
+          break;
+        case "name_length":
+          itemOffsetInPix = ((item.Title.length) - minValue) * fullAxisSize / (maxValue - minValue);
+          break;
+        case "average_rating":
+          if(item.Rating.AverageRating == "NaN") {
+            itemOffsetInPix = 10000;
+          } else {
+            itemOffsetInPix = ((item.Rating.AverageRating) - minValue) * fullAxisSize / (maxValue - minValue);
+          }
+          break;
+        case "total_ratings":
+          itemOffsetInPix = ((item.Rating.TotalRatings) - minValue) * fullAxisSize / (maxValue - minValue);
+          break;
+        case "distance":
+          itemOffsetInPix = ((item.Distance) - minValue) * fullAxisSize / (maxValue - minValue);
+          break;
+        default:
+      }
+      if (axisID == "y_axis") {
+        $('#item_' + i).fadeIn().animate({'bottom' : itemOffsetInPix}, {duration: 'slow', queue: false} );
+      } else {
+        $('#item_' + i).fadeIn().animate({'left' : itemOffsetInPix}, {duration: 'slow', queue: false} );
+      }
     } else {
-      $('#item_' + i).animate({'left' : itemOffsetInPix}, {duration: 'slow', queue: false} );
+      $('#item_' + i).fadeOut()
     }
   });
 }
