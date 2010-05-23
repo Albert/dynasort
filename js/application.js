@@ -25,6 +25,52 @@ var maxYValue;
 var xLabel;
 var yLabel;
 
+$(document).ready(function(){
+  graphHeight = pageHeight - 50;
+  graphWidth = pageWidth - $('#control_pad').width() - 50;
+  $.getJSON(
+    "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search%20where%20query%3D%22sushi%22%20and%20location%3D%22san%20francisco,%20ca%22&format=json&callback=",
+  //"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search(0)%20where%20query%3D%22pizza%22%20and%20location%3D%22New%20york%2C%20ny%22&format=json&diagnostics=true&callback=",
+    function(data){
+      dataset = data.query.results.Result;
+      $.each(dataset, function(i,item){
+        var rowContainer = $("<div class='item' id='item_" + i + "' />");
+        rowContainer.appendTo("#graph");
+        $("<div/>").html(item.Title).appendTo("#item_" + i);
+      });
+      drawGraph();
+    }
+  );
+  
+  $('input:radio').change(function(){
+    drawGraph();
+  });
+  /* filters */
+  
+	$("#total_ratings_filter_slider").slider({
+		range: true,
+		min: 0,
+		max: 150,
+		values: [0, 150],
+		slide: function(event, ui) {
+			$("#amount").val(ui.values[0] + ', ' + ui.values[1]);
+		}
+	});
+	$("#amount").val($("#total_ratings_filter_slider").slider("values", 0) + ', ' + $("#total_ratings_filter_slider").slider("values", 1));
+});
+
+function drawGraph() {
+  $("#graph").height(graphHeight).width(graphWidth);
+  $('#y_axis .lower_limit').css('right', graphWidth + 5);
+  $('#y_axis .upper_limit').css('right', graphWidth + 5);
+  yLabel = $('#y_axis_selector input:radio:checked').val();
+  xLabel = $('#x_axis_selector input:radio:checked').val();
+
+  /* construct x & y values */
+  animatePointsByAxis(yLabel, "y_axis");
+  animatePointsByAxis(xLabel, "x_axis");
+}
+
 function animatePointsByAxis(label, axisID) {
   var axisValues = [];
   $.each(dataset, function(i,item){
@@ -100,55 +146,5 @@ function animatePointsByAxis(label, axisID) {
     }
   });
 }
-
-function drawGraph() {
-  $("#graph").height(graphHeight).width(graphWidth);
-  $('#y_axis .lower_limit').css('right', graphWidth + 5);
-  $('#y_axis .upper_limit').css('right', graphWidth + 5);
-  yLabel = $('#y_axis_selector input:radio:checked').val();
-  xLabel = $('#x_axis_selector input:radio:checked').val();
-
-  /* construct x & y values */
-  animatePointsByAxis(yLabel, "y_axis");
-  animatePointsByAxis(xLabel, "x_axis");
-}
-
-$(document).ready(function(){
-  graphHeight = pageHeight - 50;
-  graphWidth = pageWidth - $('#control_pad').width() - 50;
-  $.getJSON(
-    "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search%20where%20query%3D%22sushi%22%20and%20location%3D%22san%20francisco,%20ca%22&format=json&callback=",
-  //"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search(0)%20where%20query%3D%22pizza%22%20and%20location%3D%22New%20york%2C%20ny%22&format=json&diagnostics=true&callback=",
-    function(data){
-      dataset = data.query.results.Result;
-      $.each(dataset, function(i,item){
-        var rowContainer = $("<div class='item' id='item_" + i + "' />");
-        rowContainer.appendTo("#graph");
-        $("<div/>").html(item.Title).appendTo("#item_" + i);
-      });
-    }
-  );
-  drawGraph();
-  
-  $('input:radio').change(function(){
-    drawGraph();
-  });
-  /* filters */
-  
-	$("#total_ratings_filter_slider").slider({
-		range: true,
-		min: 0,
-		max: 150,
-		values: [0, 150],
-		slide: function(event, ui) {
-			$("#amount").val(ui.values[0] + ', ' + ui.values[1]);
-		}
-	});
-	$("#amount").val($("#total_ratings_filter_slider").slider("values", 0) + ', ' + $("#total_ratings_filter_slider").slider("values", 1));
-});
-
-
-
-
 
 
