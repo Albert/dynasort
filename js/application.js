@@ -47,50 +47,95 @@ $(document).ready(function(){
   });
 
   /* filters */
-  
-  $(".filter_slider").slider({
-    range: true,
-    min: 0,
-    max: 150,
-    values: [0, 150],
-    slide: function(event, ui) {
-      slider_label = $(this).attr('id').replace("_slider", "");
-      $("#" + slider_label + "_values").val(ui.values[0] + ', ' + ui.values[1]);
-    },
-    change: function() {
-      slider_label = $(this).attr('id').replace("_slider", "");
-      lowerLimit = $("#" + slider_label + "_slider").slider("values", 0);
-      upperLimit = $("#" + slider_label + "_slider").slider("values", 1);
-      switch(slider_label){
-        case "name":
-          $.each(dataset, function(i,item){
-            item.visible = (lowerLimit < item.Title.toUpperCase().charCodeAt() && item.Title.toUpperCase().charCodeAt() < upperLimit) ? true : false;
-          });
-          break;
-        case "name_length":
-          $.each(dataset, function(i,item){
-            item.visible = (lowerLimit < item.Title.length && item.Title.length < upperLimit) ? true : false;
-          });
-          break;
-        case "average_rating":
-          $.each(dataset, function(i,item){
-            item.visible = (lowerLimit < item.Rating.AverageRating && item.Rating.AverageRating < upperLimit) ? true : false;
-          });
-          break;
-        case "total_ratings":
-          $.each(dataset, function(i,item){
-            item.visible = (lowerLimit < item.Rating.TotalRatings && item.Rating.TotalRatings < upperLimit) ? true : false;
-          });
-          break;
-        case "distance":
-          $.each(dataset, function(i,item){
-            item.visible = (lowerLimit < item.Distance && item.Distance < upperLimit) ? true : false;
-          });
-          break;
-        default:
+
+  /*
+    onload insert min and max in the corresponding div.
+    Then, take those numbers and use this parese_int
+  */
+
+  $(".filter_slider").each(function() {
+    slider_label = $(this).attr('id').replace("_slider", "");
+    
+    var axisValues = [];
+    $.each(dataset, function(i,item){
+      if (item.visible) {
+        switch(slider_label){
+          case "name":
+            axisValues.push(parseFloat(item.Title.toUpperCase().charCodeAt()));
+            break;
+          case "name_length":
+            axisValues.push(parseFloat(item.Title.length));
+            break;
+          case "average_rating":
+            if(!(item.Rating.AverageRating == "NaN")) {
+              axisValues.push(parseFloat(item.Rating.AverageRating));
+            }
+            break;
+          case "total_ratings":
+            axisValues.push(parseFloat(item.Rating.TotalRatings));
+            break;
+          case "distance":
+            axisValues.push(parseFloat(item.Distance));
+            break;
+          default:
+        }
       }
-      drawGraph();
-    }
+    });
+    minValue = axisValues.sort(function(a,b){return a - b}).slice(0,1);
+    maxValue = axisValues.sort(function(a,b){return a - b}).slice(-1);
+    
+    $(this).html(minValue + ',' + maxValue);
+  });
+  
+  $(".filter_slider").each(function() {
+    var minValue = parseInt($(this).html().split(",")[0]);
+    var maxValue = parseInt($(this).html().split(",")[1]);
+    $(this).html('');
+    
+    $(this).slider({
+      range: true,
+      min: minValue,
+      max: maxValue,
+      values: [minValue, maxValue],
+      slide: function(event, ui) {
+        slider_label = $(this).attr('id').replace("_slider", "");
+        $("#" + slider_label + "_values").val(ui.values[0] + ', ' + ui.values[1]);
+      },
+      change: function() {
+        slider_label = $(this).attr('id').replace("_slider", "");
+        lowerLimit = $("#" + slider_label + "_slider").slider("values", 0);
+        upperLimit = $("#" + slider_label + "_slider").slider("values", 1);
+        switch(slider_label){
+          case "name":
+            $.each(dataset, function(i,item){
+              item.visible = (lowerLimit < item.Title.toUpperCase().charCodeAt() && item.Title.toUpperCase().charCodeAt() < upperLimit) ? true : false;
+            });
+            break;
+          case "name_length":
+            $.each(dataset, function(i,item){
+              item.visible = (lowerLimit < item.Title.length && item.Title.length < upperLimit) ? true : false;
+            });
+            break;
+          case "average_rating":
+            $.each(dataset, function(i,item){
+              item.visible = (lowerLimit < item.Rating.AverageRating && item.Rating.AverageRating < upperLimit) ? true : false;
+            });
+            break;
+          case "total_ratings":
+            $.each(dataset, function(i,item){
+              item.visible = (lowerLimit < item.Rating.TotalRatings && item.Rating.TotalRatings < upperLimit) ? true : false;
+            });
+            break;
+          case "distance":
+            $.each(dataset, function(i,item){
+              item.visible = (lowerLimit < item.Distance && item.Distance < upperLimit) ? true : false;
+            });
+            break;
+          default:
+        }
+        drawGraph();
+      }
+    });
   });
 });
 
