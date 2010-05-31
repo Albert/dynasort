@@ -13,8 +13,6 @@ On filter
 */
 
 var dataset;
-var pageHeight = $(window).height();
-var pageWidth = $(window).width();
 var graphHeight;
 var graphWidth;
 var minXValue;
@@ -25,8 +23,7 @@ var xLabel;
 var yLabel;
 
 $(document).ready(function(){
-  graphHeight = pageHeight - 50;
-  graphWidth = pageWidth - $('#control_pad').width() - 50;
+  sizeGraph();
   //$.getJSON(
   //"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search%20where%20query%3D%22sushi%22%20and%20location%3D%22san%20francisco,%20ca%22&format=json&callback=",
   //"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search(0)%20where%20query%3D%22pizza%22%20and%20location%3D%22New%20york%2C%20ny%22&format=json&diagnostics=true&callback=",
@@ -41,8 +38,13 @@ $(document).ready(function(){
       drawGraph();
   //  }
   //);
-  
+
   $('input:radio').change(function(){
+    drawGraph();
+  });
+
+  $(window).resize(function(){
+    sizeGraph();
     drawGraph();
   });
 
@@ -139,8 +141,15 @@ $(document).ready(function(){
   });
 });
 
-function drawGraph() {
+function sizeGraph() {
+  pageHeight = $(window).height();
+  pageWidth = $(window).width();
+  graphHeight = pageHeight - 50;
+  graphWidth = pageWidth - $('#control_pad').width() - 50;
   $("#graph").height(graphHeight).width(graphWidth);
+}
+
+function drawGraph() {
   $('#y_axis .lower_limit').css('right', graphWidth + 5);
   $('#y_axis .upper_limit').css('right', graphWidth + 5);
   yLabel = $('#y_axis_selector input:radio:checked').val();
