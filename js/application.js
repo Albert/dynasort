@@ -33,6 +33,11 @@ $(document).ready(function(){
         var rowContainer = $("<div class='item' id='item_" + i + "' />");
         rowContainer.appendTo("#graph");
         item.visible = true;
+        item.name_visible = true;
+        item.name_length_visible = true;
+        item.average_rating_visible = true;
+        item.total_ratings_visible = true;
+        item.distance_visible = true;
         $("<div/>").html(item.Title).appendTo("#item_" + i);
       });
       drawGraph();
@@ -110,31 +115,40 @@ $(document).ready(function(){
         switch(slider_label){
           case "name":
             $.each(dataset, function(i,item){
-              item.visible = (lowerLimit < item.Title.toUpperCase().charCodeAt() && item.Title.toUpperCase().charCodeAt() < upperLimit) ? true : false;
+              item.name_visible = (lowerLimit <= item.Title.toUpperCase().charCodeAt() && item.Title.toUpperCase().charCodeAt() <= upperLimit) ? true : false;
             });
             break;
           case "name_length":
             $.each(dataset, function(i,item){
-              item.visible = (lowerLimit < item.Title.length && item.Title.length < upperLimit) ? true : false;
+              item.name_length_visible = (lowerLimit <= item.Title.length && item.Title.length <= upperLimit) ? true : false;
             });
             break;
           case "average_rating":
             $.each(dataset, function(i,item){
-              item.visible = (lowerLimit < item.Rating.AverageRating && item.Rating.AverageRating < upperLimit) ? true : false;
+              item.average_rating_visible = (lowerLimit <= item.Rating.AverageRating && item.Rating.AverageRating <= upperLimit) ? true : false;
             });
             break;
           case "total_ratings":
             $.each(dataset, function(i,item){
-              item.visible = (lowerLimit < item.Rating.TotalRatings && item.Rating.TotalRatings < upperLimit) ? true : false;
+              item.total_ratings_visible = (lowerLimit <= item.Rating.TotalRatings && item.Rating.TotalRatings <= upperLimit) ? true : false;
             });
             break;
           case "distance":
             $.each(dataset, function(i,item){
-              item.visible = (lowerLimit < item.Distance && item.Distance < upperLimit) ? true : false;
+              item.distance_visible = (lowerLimit <= item.Distance && item.Distance <= upperLimit) ? true : false;
             });
             break;
           default:
         }
+        $.each(dataset, function(i,item){
+          item.visible = (
+            item.name_visible == true &&
+            item.name_length_visible == true &&
+            item.average_rating_visible == true &&
+            item.total_ratings_visible == true &&
+            item.distance_visible == true
+            ) ? true : false;
+        });
         drawGraph();
       }
     });
