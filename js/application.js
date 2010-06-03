@@ -106,7 +106,13 @@ $(document).ready(function(){
       values: [minValue, maxValue],
       slide: function(event, ui) {
         slider_label = $(this).attr('id').replace("_slider", "");
-        $("#" + slider_label + "_values").val(ui.values[0] + ', ' + ui.values[1]);
+        switch(slider_label){
+          case "name":
+            $("#" + slider_label + "_values").val(String.fromCharCode(ui.values[0]) + ', ' + String.fromCharCode(ui.values[1]));
+            break;
+          default:
+            $("#" + slider_label + "_values").val(ui.values[0] + ', ' + ui.values[1]);
+        }
       },
       change: function() {
         slider_label = $(this).attr('id').replace("_slider", "");
