@@ -38,7 +38,7 @@ $(document).ready(function(){
         item.average_rating_visible = true;
         item.total_ratings_visible = true;
         item.distance_visible = true;
-        $("<div/>").html(item.Title).appendTo("#item_" + i);
+        $("<div/>").html("x").appendTo("#item_" + i);
       });
       drawGraph();
   //  }
