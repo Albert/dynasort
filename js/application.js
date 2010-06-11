@@ -38,7 +38,7 @@ $(document).ready(function(){
         item.average_rating_visible = true;
         item.total_ratings_visible = true;
         item.distance_visible = true;
-        $("<div/>").html("x").appendTo("#item_" + i);
+        $("<div/>").html('<a href="#" class="name" title="' + item.Title + ', ' + item.Distance + 'mi away, ' + item.Rating.TotalRatings + ' total ratings, average rating of ' + item.Rating.AverageRating +'">x</a>').appendTo("#item_" + i);
       });
       drawGraph();
   //  }
@@ -222,9 +222,9 @@ function animatePointsByAxis(label, axisID) {
   $('#' + axisID + ' .upper_limit').html(maxValueLabel);
 
   if (axisID == "y_axis") {
-    fullAxisSize = graphHeight;
+    fullAxisSize = graphHeight - 10;
   } else {
-    fullAxisSize = graphWidth
+    fullAxisSize = graphWidth - 10;
   }
 
   $.each(dataset, function(i,item){
