@@ -1,0 +1,6 @@
+# Config
+config/database.yml
+config/settings.yml
+
+Mac Stuff Development-related files
+.DS_Store
