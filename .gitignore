@@ -1,6 +1,5 @@
 # Config
-config/database.yml
-config/settings.yml
+cloudfusion/config.inc.php
 
 Mac Stuff Development-related files
 .DS_Store
