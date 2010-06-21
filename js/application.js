@@ -10,6 +10,15 @@ Json loading completion
 On window resize
 On axis selection
 On filter
+
+i want:
+customer review count
+average customer review
+price
+sales rank
+
+imgs
+
 */
 
 var dataset;
@@ -24,25 +33,19 @@ var yLabel;
 
 $(document).ready(function(){
   sizeGraph();
-  //$.getJSON(
-  //"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search%20where%20query%3D%22sushi%22%20and%20location%3D%22san%20francisco,%20ca%22&format=json&callback=",
-  //"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search(0)%20where%20query%3D%22pizza%22%20and%20location%3D%22New%20york%2C%20ny%22&format=json&diagnostics=true&callback=",
-  //  function(data){
-      dataset = data.query.results.Result;
-      $.each(dataset, function(i,item){
-        var rowContainer = $("<div class='item' id='item_" + i + "' />");
-        rowContainer.appendTo("#graph");
-        item.visible = true;
-        item.name_visible = true;
-        item.name_length_visible = true;
-        item.average_rating_visible = true;
-        item.total_ratings_visible = true;
-        item.distance_visible = true;
-        $("<div/>").html('<a href="#" class="name" title="' + item.Title + ', ' + item.Distance + 'mi away, ' + item.Rating.TotalRatings + ' total ratings, average rating of ' + item.Rating.AverageRating +'">x</a>').appendTo("#item_" + i);
-      });
-      drawGraph();
-  //  }
-  //);
+  $.getJSON("search_for_products.php", function(data) {
+    dataset = data.body.Items.Item;
+    $.each(dataset, function(i,item){
+      var rowContainer = $("<div class='item' id='item_" + i + "' />");
+      rowContainer.appendTo("#graph");
+      item.visible = true;
+      item.average_review_visible = true;
+      item.total_reviews_visible = true;
+      item.distance_visible = true;
+      $("<div/>").html('x').appendTo("#item_" + i);
+    });
+    drawGraph();
+  });
 
   $('input:radio').change(function(){
     drawGraph();
@@ -73,12 +76,12 @@ $(document).ready(function(){
           case "name_length":
             axisValues.push(parseFloat(item.Title.length));
             break;
-          case "average_rating":
+          case "average_review":
             if(!(item.Rating.AverageRating == "NaN")) {
               axisValues.push(parseFloat(item.Rating.AverageRating));
             }
             break;
-          case "total_ratings":
+          case "total_reviews":
             axisValues.push(parseFloat(item.Rating.TotalRatings));
             break;
           case "distance":
@@ -129,14 +132,14 @@ $(document).ready(function(){
               item.name_length_visible = (lowerLimit <= item.Title.length && item.Title.length <= upperLimit) ? true : false;
             });
             break;
-          case "average_rating":
+          case "average_review":
             $.each(dataset, function(i,item){
-              item.average_rating_visible = (lowerLimit <= item.Rating.AverageRating && item.Rating.AverageRating <= upperLimit) ? true : false;
+              item.average_review_visible = (lowerLimit <= item.Rating.AverageRating && item.Rating.AverageRating <= upperLimit) ? true : false;
             });
             break;
-          case "total_ratings":
+          case "total_reviews":
             $.each(dataset, function(i,item){
-              item.total_ratings_visible = (lowerLimit <= item.Rating.TotalRatings && item.Rating.TotalRatings <= upperLimit) ? true : false;
+              item.total_reviews_visible = (lowerLimit <= item.Rating.TotalRatings && item.Rating.TotalRatings <= upperLimit) ? true : false;
             });
             break;
           case "distance":
@@ -150,8 +153,8 @@ $(document).ready(function(){
           item.visible = (
             item.name_visible == true &&
             item.name_length_visible == true &&
-            item.average_rating_visible == true &&
-            item.total_ratings_visible == true &&
+            item.average_review_visible == true &&
+            item.total_reviews_visible == true &&
             item.distance_visible == true
             ) ? true : false;
         });
@@ -191,12 +194,12 @@ function animatePointsByAxis(label, axisID) {
         case "name_length":
           axisValues.push(parseFloat(item.Title.length));
           break;
-        case "average_rating":
+        case "average_review":
           if(!(item.Rating.AverageRating == "NaN")) {
             axisValues.push(parseFloat(item.Rating.AverageRating));
           }
           break;
-        case "total_ratings":
+        case "total_reviews":
           axisValues.push(parseFloat(item.Rating.TotalRatings));
           break;
         case "distance":
@@ -236,14 +239,14 @@ function animatePointsByAxis(label, axisID) {
         case "name_length":
           itemOffsetInPix = ((item.Title.length) - minValue) * fullAxisSize / (maxValue - minValue);
           break;
-        case "average_rating":
+        case "average_review":
           if(item.Rating.AverageRating == "NaN") {
             itemOffsetInPix = 10000;
           } else {
             itemOffsetInPix = ((item.Rating.AverageRating) - minValue) * fullAxisSize / (maxValue - minValue);
           }
           break;
-        case "total_ratings":
+        case "total_reviews":
           itemOffsetInPix = ((item.Rating.TotalRatings) - minValue) * fullAxisSize / (maxValue - minValue);
           break;
         case "distance":
@@ -261,5 +264,3 @@ function animatePointsByAxis(label, axisID) {
     }
   });
 }
-
-
