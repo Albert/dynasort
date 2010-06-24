@@ -25,53 +25,21 @@
     <div id="control_pad">
       <div id="y_axis_selector">
         <h2>Y Axis</h2>
-        <ul class="label">
-          <li>
-            <label>Name of Place</label>
-            <input type="radio" name="y_axis_sort_by" value="name" />
-          </li>
-          <li>
-            <label>Length of Name</label>
-            <input type="radio" name="y_axis_sort_by" value="name_length" />
-          </li>
-          <li>
-            <label>Average Rating</label>
-            <input type="radio" name="y_axis_sort_by" value="average_rating" />
-          </li>
-          <li>
-            <label>Total Ratings</label>
-            <input type="radio" name="y_axis_sort_by" value="total_ratings" checked="checked" />
-          </li>
-          <li>
-            <label>Distance</label>
-            <input type="radio" name="y_axis_sort_by" value="distance" />
-          </li>
-        </ul>
+        <select id="y_axis_sort_by">
+          <option value="price" selected="selected">Price</option>
+          <option value="average_rating">Average Rating</option>
+          <option value="total_reviews">Total Reviews</option>
+          <option value="sales_rank">Sales Rank</option>
+        </select>
       </div>
       <div id="x_axis_selector">
         <h2>X Axis</h2>
-        <ul class="label">
-          <li>
-            <label>Name of Place</label>
-            <input type="radio" name="x_axis_sort_by" value="name" />
-          </li>
-          <li>
-            <label>Length of Name</label>
-            <input type="radio" name="x_axis_sort_by" value="name_length" />
-          </li>
-          <li>
-            <label>Average Rating</label>
-            <input type="radio" name="x_axis_sort_by" value="average_rating" />
-          </li>
-          <li>
-            <label>Total Ratings</label>
-            <input type="radio" name="x_axis_sort_by" value="total_ratings" />
-          </li>
-          <li>
-            <label>Distance</label>
-            <input type="radio" name="x_axis_sort_by" value="distance" checked="checked" />
-          </li>
-        </ul>
+        <select id="y_axis_sort_by">
+          <option value="price">Price</option>
+          <option value="average_rating" selected="selected">Average Rating</option>
+          <option value="total_reviews">Total Reviews</option>
+          <option value="sales_rank">Sales Rank</option>
+        </select>
       </div>
       <div id="filters">
         <h2>Filters</h2>

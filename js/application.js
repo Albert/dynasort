@@ -12,7 +12,7 @@ On axis selection
 On filter
 */
 
-var dataset;
+var items;
 var graphHeight;
 var graphWidth;
 var minXValue;
@@ -29,11 +29,10 @@ $(document).ready(function(){
       var itemDomRep = $('<a href="' + item.detailPage[0] + '" class="item" id="item_' + i + '" />').html(itemDomImg);
       itemDomRep.appendTo("#graph");
       item.visible = true;
-      item.name_visible = true;
-      item.name_length_visible = true;
-      item.average_rating_visible = true;
-      item.total_ratings_visible = true;
-      item.distance_visible = true;
+      item.priceVisible = true;
+      item.averageRatingVisible = true;
+      item.totalReviewsVisible = true;
+      item.salesRankVisible = true;
     });
   drawGraph();
 
@@ -57,7 +56,7 @@ $(document).ready(function(){
     slider_label = $(this).attr('id').replace("_slider", "");
     
     var axisValues = [];
-    $.each(dataset, function(i,item){
+    $.each(items, function(i,item){
       if (item.visible) {
         switch(slider_label){
           case "name":
@@ -113,33 +112,33 @@ $(document).ready(function(){
         upperLimit = $("#" + slider_label + "_slider").slider("values", 1);
         switch(slider_label){
           case "name":
-            $.each(dataset, function(i,item){
+            $.each(items, function(i,item){
               item.name_visible = (lowerLimit <= item.Title.toUpperCase().charCodeAt() && item.Title.toUpperCase().charCodeAt() <= upperLimit) ? true : false;
             });
             break;
           case "name_length":
-            $.each(dataset, function(i,item){
+            $.each(items, function(i,item){
               item.name_length_visible = (lowerLimit <= item.Title.length && item.Title.length <= upperLimit) ? true : false;
             });
             break;
           case "average_rating":
-            $.each(dataset, function(i,item){
+            $.each(items, function(i,item){
               item.average_rating_visible = (lowerLimit <= item.Rating.AverageRating && item.Rating.AverageRating <= upperLimit) ? true : false;
             });
             break;
           case "total_ratings":
-            $.each(dataset, function(i,item){
+            $.each(items, function(i,item){
               item.total_ratings_visible = (lowerLimit <= item.Rating.TotalRatings && item.Rating.TotalRatings <= upperLimit) ? true : false;
             });
             break;
           case "distance":
-            $.each(dataset, function(i,item){
+            $.each(items, function(i,item){
               item.distance_visible = (lowerLimit <= item.Distance && item.Distance <= upperLimit) ? true : false;
             });
             break;
           default:
         }
-        $.each(dataset, function(i,item){
+        $.each(items, function(i,item){
           item.visible = (
             item.name_visible == true &&
             item.name_length_visible == true &&
@@ -165,8 +164,8 @@ function sizeGraph() {
 function drawGraph() {
   $('#y_axis .lower_limit').css('right', graphWidth + 5);
   $('#y_axis .upper_limit').css('right', graphWidth + 5);
-  yLabel = $('#y_axis_selector input:radio:checked').val();
-  xLabel = $('#x_axis_selector input:radio:checked').val();
+  yLabel = $('#y_axis_selector option:selected').val();
+  xLabel = $('#x_axis_selector option:selected').val();
 
   /* construct x & y values */
   animatePointsByAxis(yLabel, "y_axis");
@@ -175,7 +174,7 @@ function drawGraph() {
 
 function animatePointsByAxis(label, axisID) {
   var axisValues = [];
-  $.each(dataset, function(i,item){
+  $.each(items, function(i,item){
     if (item.visible) {
       switch(label){
         case "name":
@@ -220,7 +219,7 @@ function animatePointsByAxis(label, axisID) {
     fullAxisSize = graphWidth - 10;
   }
 
-  $.each(dataset, function(i,item){
+  $.each(items, function(i,item){
     if (item.visible) {
       switch(label){
         case "name":
