@@ -1,5 +1,11 @@
 # Config
 cloudfusion/config.inc.php
 
-Mac Stuff Development-related files
+# Mac Stuff Development-related files
 .DS_Store
+
+# eclipse files
+.project
+.buildpath
+.settings
+.metadata
