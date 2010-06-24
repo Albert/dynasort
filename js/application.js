@@ -24,25 +24,18 @@ var yLabel;
 
 $(document).ready(function(){
   sizeGraph();
-  //$.getJSON(
-  //"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search%20where%20query%3D%22sushi%22%20and%20location%3D%22san%20francisco,%20ca%22&format=json&callback=",
-  //"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search(0)%20where%20query%3D%22pizza%22%20and%20location%3D%22New%20york%2C%20ny%22&format=json&diagnostics=true&callback=",
-  //  function(data){
-      dataset = data.query.results.Result;
-      $.each(dataset, function(i,item){
-        var rowContainer = $("<div class='item' id='item_" + i + "' />");
-        rowContainer.appendTo("#graph");
-        item.visible = true;
-        item.name_visible = true;
-        item.name_length_visible = true;
-        item.average_rating_visible = true;
-        item.total_ratings_visible = true;
-        item.distance_visible = true;
-        $("<div/>").html('<a href="#" class="name" title="' + item.Title + ', ' + item.Distance + 'mi away, ' + item.Rating.TotalRatings + ' total ratings, average rating of ' + item.Rating.AverageRating +'">x</a>').appendTo("#item_" + i);
-      });
-      drawGraph();
-  //  }
-  //);
+    $.each(items, function(i,item){
+      var itemDomImg = '<img src="' + item.imgURL[0] + '" alt="" />';
+      var itemDomRep = $('<a href="' + item.detailPage[0] + '" class="item" id="item_' + i + '" />').html(itemDomImg);
+      itemDomRep.appendTo("#graph");
+      item.visible = true;
+      item.name_visible = true;
+      item.name_length_visible = true;
+      item.average_rating_visible = true;
+      item.total_ratings_visible = true;
+      item.distance_visible = true;
+    });
+  drawGraph();
 
   $('input:radio').change(function(){
     drawGraph();

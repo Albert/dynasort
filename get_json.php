@@ -5,12 +5,13 @@ $util = new CFUtilities();
 
 $itemsArray = array();
 
-for ($counter = 1; $counter < 5; $counter++) {
+for ($counter = 1; $counter < 6; $counter++) {
   $response = $pas->item_search("electric fan", array("ResponseGroup" => "Large", ItemPage => $counter));
   foreach($response->body->Items->Item as $item) {
     $itemArray = array(
+      "detailPage" => $item -> DetailPageURL,
       "title" => $item -> ItemAttributes -> Title,
-      "URL" => $item -> ImageSets -> ImageSet -> SwatchImage -> URL,
+      "imgURL" => $item -> ImageSets -> ImageSet -> SwatchImage -> URL,
       "totalReviews" => $item -> CustomerReviews -> TotalReviews,
       "averageRating" => $item -> CustomerReviews -> AverageRating,
       "salesRank" => $item -> SalesRank,
@@ -21,5 +22,4 @@ for ($counter = 1; $counter < 5; $counter++) {
   }
 }
 echo json_encode($itemsArray);
-echo $itemsArray;
 ?>
