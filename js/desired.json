@@ -1,0 +1,41 @@
+{
+  header: {
+    xAxis: "aveRating",
+    yAxis: "numRatings",
+    template: "underscore template",
+    graphableAxes: {
+      numRatings: {
+        dataType: "number",
+        friendlyName: "# of Ratings",
+      },
+      aveRating: {
+        dataType: "number",
+        friendlyName: "Average Rating"
+      },
+      distance: {
+        dataType: "number",
+        friendlyName: "Distance" // TODO: Eventually make it so that friendlyName is automatically generated
+      }
+    }
+  },
+  data: [
+    {
+      name: "Rays Pizza",
+      numRatings: 35,
+      aveRating: 3.5,
+      distance: 3.2
+    },
+    {
+      name: "Papa Johns",
+      numRatings: 2,
+      aveRating: 4.5,
+      distance: 2.3
+    },
+    {
+      name: "Dominos",
+      numRatings: 8,
+      aveRating: 3.5,
+      distance: 5.3
+    },
+  ]
+}
