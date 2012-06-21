@@ -1,0 +1,213 @@
+/* line 17, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* line 20, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+body {
+  line-height: 1;
+}
+
+/* line 22, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 24, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 26, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 28, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 101, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 30, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 114, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 8, ../sass/_style.scss */
+#control_pad {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/* line 12, ../sass/_style.scss */
+.control_pad_open #control_pad {
+  width: 210px;
+  padding: 15px 20px;
+}
+/* line 16, ../sass/_style.scss */
+.control_pad_closed #control_pad {
+  width: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+/* line 22, ../sass/_style.scss */
+#control_pad h1 a {
+  display: block;
+  height: 40px;
+  padding-left: 45px;
+  border: 1px solid black;
+  font-size: 34px;
+  line-height: 40px;
+  color: #50853a;
+  font-family: helvetica, arial, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  text-shadow: 0 0 1px black;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  background: url("../images/philosoraptor.png") no-repeat left bottom, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #e6e4da));
+  background: url("../images/philosoraptor.png") no-repeat left bottom, -webkit-linear-gradient(top center, #ffffff, #e6e4da);
+  background: url("../images/philosoraptor.png") no-repeat left bottom, -moz-linear-gradient(top center, #ffffff, #e6e4da);
+  background: url("../images/philosoraptor.png") no-repeat left bottom, -o-linear-gradient(top center, #ffffff, #e6e4da);
+  background: url("../images/philosoraptor.png") no-repeat left bottom, -ms-linear-gradient(top center, #ffffff, #e6e4da);
+  background: url("../images/philosoraptor.png") no-repeat left bottom, linear-gradient(top center, #ffffff, #e6e4da);
+}
+
+/* line 45, ../sass/_style.scss */
+#graph {
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+}
+/* line 49, ../sass/_style.scss */
+.control_pad_open #graph {
+  right: 0;
+  border-left: 1px solid #e6e4da;
+}
+/* line 54, ../sass/_style.scss */
+#graph li {
+  font-weight: bold;
+  color: #333333;
+}
+/* line 60, ../sass/_style.scss */
+#graph .lower,
+#graph .upper {
+  font-size: 25px;
+}
+/* line 63, ../sass/_style.scss */
+#graph .label {
+  font-size: 30px;
+}
+/* line 68, ../sass/_style.scss */
+#graph #x_axis,
+#graph #y_axis {
+  position: absolute;
+}
+/* line 70, ../sass/_style.scss */
+#graph #x_axis li,
+#graph #y_axis li {
+  position: absolute;
+}
+/* line 75, ../sass/_style.scss */
+#graph #y_axis {
+  top: 0;
+  left: 0;
+  width: 75px;
+  margin-top: 35px;
+}
+/* line 80, ../sass/_style.scss */
+#graph #y_axis li {
+  width: 0;
+  margin-left: -500px;
+  left: 60px;
+}
+/* line 84, ../sass/_style.scss */
+#graph #y_axis li.lower {
+  bottom: 0;
+}
+/* line 85, ../sass/_style.scss */
+#graph #y_axis li.upper {
+  top: 0;
+}
+/* line 86, ../sass/_style.scss */
+#graph #y_axis li.label {
+  top: 50%;
+  margin-top: -0.5em;
+}
+/* line 87, ../sass/_style.scss */
+#graph #y_axis li span {
+  display: inline-block;
+  text-align: center;
+  width: 1000px;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+/* line 96, ../sass/_style.scss */
+#graph #x_axis {
+  bottom: 0;
+  right: 0;
+  height: 75px;
+  margin-right: 35px;
+}
+/* line 101, ../sass/_style.scss */
+#graph #x_axis li {
+  top: 5px;
+}
+/* line 103, ../sass/_style.scss */
+#graph #x_axis li.lower {
+  left: 0;
+}
+/* line 104, ../sass/_style.scss */
+#graph #x_axis li.upper {
+  right: 0;
+}
+/* line 105, ../sass/_style.scss */
+#graph #x_axis li.label {
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+  position: relative;
+}
+/* line 108, ../sass/_style.scss */
+#graph .item {
+  position: absolute;
+}
