@@ -1,10 +1,12 @@
 $(document).ready(function() {
   var winHeight = $(window).height();
   var winWidth = $(window).width() - $("#control_pad").outerWidth() - 1;
-  $("#y_axis").height(winHeight - 75 - 35);
   $("#graph").height(winHeight);
+  $("#y_axis").height(winHeight - 75 - 35);
+  $("#graph_field").height(winHeight - 75 - 35);
   $("#graph").width(winWidth);
   $("#x_axis").width(winWidth - 75 - 35);
+  $("#graph_field").width(winWidth - 75 - 35);
 });
 /*
 

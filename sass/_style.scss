@@ -62,6 +62,11 @@ $bignum: 1000px;
   }
   .label {
     font-size: 30px;
+    .axis_edit {
+      display: inline-block;
+      margin-left: 10px;
+      z-index: 30;
+    }
   }
 
   #x_axis,
@@ -80,16 +85,17 @@ $bignum: 1000px;
     li {
       width: 0;
       margin-left: -($bignum/2);
-      left: 60px;
+      left: 50px;
       &.lower { bottom: 0; }
       &.upper { top: 0;    }
-      &.label { top: 50%; margin-top: -.5em}
+      &.label { top: 50%; left: 40px; margin-top: -.5em; z-index: 30; }
+      &.label span { z-index: 30; }
       span {
         display: inline-block;
         text-align: center;
         width: $bignum;
         @include rotate( -90deg );
-      }        
+      }
     }      
   }
   
@@ -99,13 +105,24 @@ $bignum: 1000px;
     height: 75px;
     margin-right: 35px;
     li {
-      top: 5px;
+      top: 10px;
       &.lower { left: 0; }
       &.upper { right: 0; }
-      &.label { text-align: center; margin: 0 auto; display:block; position: relative}
+      &.label { top: 20px; text-align: center; margin: 0 auto; display:block; position: relative}
     }
   }
+
+  #graph_field {
+    position: absolute;
+    top: 35px;
+    right: 35px;
+    border-bottom: 1px solid $charcoal;
+    border-left: 1px solid $charcoal;
+  }
+
   .item {
     position: absolute;
+    bottom: 0;
+    left: 0;
   }
 }

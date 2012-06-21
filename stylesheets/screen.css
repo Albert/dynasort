@@ -134,43 +134,55 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 #graph .label {
   font-size: 30px;
 }
-/* line 68, ../sass/_style.scss */
+/* line 65, ../sass/_style.scss */
+#graph .label .axis_edit {
+  display: inline-block;
+  margin-left: 10px;
+  z-index: 30;
+}
+/* line 73, ../sass/_style.scss */
 #graph #x_axis,
 #graph #y_axis {
   position: absolute;
 }
-/* line 70, ../sass/_style.scss */
+/* line 75, ../sass/_style.scss */
 #graph #x_axis li,
 #graph #y_axis li {
   position: absolute;
 }
-/* line 75, ../sass/_style.scss */
+/* line 80, ../sass/_style.scss */
 #graph #y_axis {
   top: 0;
   left: 0;
   width: 75px;
   margin-top: 35px;
 }
-/* line 80, ../sass/_style.scss */
+/* line 85, ../sass/_style.scss */
 #graph #y_axis li {
   width: 0;
   margin-left: -500px;
-  left: 60px;
+  left: 50px;
 }
-/* line 84, ../sass/_style.scss */
+/* line 89, ../sass/_style.scss */
 #graph #y_axis li.lower {
   bottom: 0;
 }
-/* line 85, ../sass/_style.scss */
+/* line 90, ../sass/_style.scss */
 #graph #y_axis li.upper {
   top: 0;
 }
-/* line 86, ../sass/_style.scss */
+/* line 91, ../sass/_style.scss */
 #graph #y_axis li.label {
   top: 50%;
+  left: 40px;
   margin-top: -0.5em;
+  z-index: 30;
 }
-/* line 87, ../sass/_style.scss */
+/* line 92, ../sass/_style.scss */
+#graph #y_axis li.label span {
+  z-index: 30;
+}
+/* line 93, ../sass/_style.scss */
 #graph #y_axis li span {
   display: inline-block;
   text-align: center;
@@ -181,33 +193,44 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -o-transform: rotate(-90deg);
   transform: rotate(-90deg);
 }
-/* line 96, ../sass/_style.scss */
+/* line 102, ../sass/_style.scss */
 #graph #x_axis {
   bottom: 0;
   right: 0;
   height: 75px;
   margin-right: 35px;
 }
-/* line 101, ../sass/_style.scss */
+/* line 107, ../sass/_style.scss */
 #graph #x_axis li {
-  top: 5px;
+  top: 10px;
 }
-/* line 103, ../sass/_style.scss */
+/* line 109, ../sass/_style.scss */
 #graph #x_axis li.lower {
   left: 0;
 }
-/* line 104, ../sass/_style.scss */
+/* line 110, ../sass/_style.scss */
 #graph #x_axis li.upper {
   right: 0;
 }
-/* line 105, ../sass/_style.scss */
+/* line 111, ../sass/_style.scss */
 #graph #x_axis li.label {
+  top: 20px;
   text-align: center;
   margin: 0 auto;
   display: block;
   position: relative;
 }
-/* line 108, ../sass/_style.scss */
+/* line 115, ../sass/_style.scss */
+#graph #graph_field {
+  position: absolute;
+  top: 35px;
+  right: 35px;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #333333;
+}
+/* line 123, ../sass/_style.scss */
 #graph .item {
   position: absolute;
+  bottom: 0;
+  left: 0;
 }
