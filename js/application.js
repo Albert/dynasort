@@ -1,13 +1,3 @@
-$(document).ready(function() {
-  var winHeight = $(window).height();
-  var winWidth = $(window).width() - $("#control_pad").outerWidth() - 1;
-  $("#graph").height(winHeight);
-  $("#y_axis").height(winHeight - 75 - 35);
-  $("#graph_field").height(winHeight - 75 - 35);
-  $("#graph").width(winWidth);
-  $("#x_axis").width(winWidth - 75 - 35);
-  $("#graph_field").width(winWidth - 75 - 35);
-});
 /*
 
 Events:
@@ -243,14 +233,30 @@ var points = {
   }
 }
 
-rawData.fetch();
-controllers.init();
-axes.init();
+function sizeContents() {
+  var winHeight = $(window).height();
+  var winWidth = $(window).width() - $("#control_pad").outerWidth() - 1;
+  $("#graph").height(winHeight);
+  $("#y_axis").height(winHeight - 75 - 35);
+  $("#graph_field").height(winHeight - 75 - 35);
+  $("#graph").width(winWidth);
+  $("#x_axis").width(winWidth - 75 - 35);
+  $("#graph_field").width(winWidth - 75 - 35);
+}
+
+$(document).ready(function() {
+  $(window).resize(function() {
+    sizeContents();
+  });
+  sizeContents();
+  rawData.fetch();
+  controllers.init();
+  axes.init();
+});
 
 //  _.each(config.axes, function(defaultAttribute, axisName){
 //    axes.init(axisName, defaultAttribute);
 //  });
-
 
 
 
