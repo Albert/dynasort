@@ -1,51 +1,8 @@
-var viewTemplate = _.template('\
-<a href="<%= url %>">\
-  <img src="<%= thumbnail %>" alt="<%= title %>" />\
-  <span class="title"><%= title %></span>\
-</a>\
-comments: <a href="<%= permalink %>" class="comments"><%= num_comments %></a>\
-By <%= author %>');
+var dataSet = {};
+var viewTemplate;
 
-var config = {
-  jsonPath: "http://www.reddit.com/r/pics.json?jsonp=?&limit=100",
-  jsonDataCollection: "data.children",
-  jsonNodeNest: "data",
-  dataAttributes: {
-    rank: {
-      basedOnIndex: true
-    },
-    subreddit: {
-      type: "string",
-      categorySort: true
-    },
-    created: {
-      friendlyName: "Created At",
-      type: "dateTime",
-      jsonPath: "created_utc"
-    },
-    score: {
-      type: "int"
-    },
-    comments: {
-      friendlyName: "Comment Count",
-      type: "int",
-      jsonPath: "num_comments"
-    }
-  },
-  displayAttributes: {
-    author: {},
-    title: {},
-    thumbnail: {},
-    url: {},
-    permalink: {},
-    num_comments: {}
-  },
-  viewTemplate: viewTemplate,
-  axes: {
-    x: "rank",
-    y: "created"
-  }
-}
+/*
+
 
 var rawData = {
   "fetch": function() {
@@ -170,6 +127,14 @@ var points = {
   }
 }
 
+
+//  _.each(config.axes, function(defaultAttribute, axisName){
+//    axes.init(axisName, defaultAttribute);
+//  });
+
+
+*/
+
 function sizeContents() {
   var winHeight = $(window).height();
   var winWidth = $(window).width() - $("#control_pad").outerWidth() - 1;
@@ -190,10 +155,4 @@ $(document).ready(function() {
   controllers.init();
   axes.init();
 });
-
-//  _.each(config.axes, function(defaultAttribute, axisName){
-//    axes.init(axisName, defaultAttribute);
-//  });
-
-
 

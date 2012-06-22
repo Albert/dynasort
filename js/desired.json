@@ -1,23 +1,27 @@
-{
-  header: {
-    xAxis: "aveRating",
-    yAxis: "numRatings",
-    template: "underscore template",
-    graphableAxes: {
-      numRatings: {
-        dataType: "number",
-        friendlyName: "# of Ratings",
-      },
-      aveRating: {
-        dataType: "number",
-        friendlyName: "Average Rating"
-      },
-      distance: {
-        dataType: "number",
-        friendlyName: "Distance" // TODO: Eventually make it so that friendlyName is automatically generated
-      }
+viewTemplate = "underscore template";
+dataSet = {
+  columns: [
+    {
+      name: "name",
+      dataType: "string",
+      friendlyName: "Name"
+    },
+    {
+      name: "numRatings",
+      dataType: "number",
+      friendlyName: "# of Ratings"
+    },
+    {
+      name: "aveRating",
+      dataType: "number",
+      friendlyName: "Average Rating"
+    },
+    {
+      name: "distance",
+      dataType: "number",
+      friendlyName: "Distance" // TODO: Eventually make it so that friendlyName is automatically generated
     }
-  },
+  ],
   data: [
     {
       name: "Rays Pizza",

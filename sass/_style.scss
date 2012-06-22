@@ -51,7 +51,8 @@ $bignum: 1000px;
     border-left: 1px solid $beige;
   }
 
-  li {
+  #x_axis li,
+  #y_axis li {
     font-weight: bold;
     color: $charcoal;
   }
@@ -124,5 +125,48 @@ $bignum: 1000px;
     position: absolute;
     bottom: 0;
     left: 0;
+    background-color: #feffc4;
+    border: 1px solid #c4c4c4;
+    @include box-shadow(0 20px 50px black);
+    .thumbnail_container {
+      margin: 10px;
+      float: left;
+      width: 70px;
+      line-height: 1px;
+      .thumbnail {
+        border: 1px solid black;
+      }
+    }
+    .bd {
+      font-family: verdana, arial, helvetica, sans-serif;
+      color: #555555;
+      margin: 10px 10px 10px 95px;
+      font-size: 10px;
+      line-height: 12px;
+      a {
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      a.name {
+        font-size: 16px;
+        margin-right: 5px;
+        color: #0000ff;
+        &:hover {
+          text-decoration: none;
+        }
+        &:visited {
+          color: #551a8b;
+        }
+      }
+      .domain,
+      .domain a {
+        color: #555555;
+      }
+      .comments {
+        font-weight: bold;
+      }
+    }
   }
 }
