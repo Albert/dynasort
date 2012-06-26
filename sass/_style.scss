@@ -42,6 +42,7 @@ $bignum: 1000px;
   }
 }
 
+
 #graph {
   position: absolute;
   top: 0;
@@ -49,12 +50,6 @@ $bignum: 1000px;
   .control_pad_open & {
     right: 0;
     border-left: 1px solid $beige;
-  }
-
-  #x_axis li,
-  #y_axis li {
-    font-weight: bold;
-    color: $charcoal;
   }
 
   .lower,
@@ -75,6 +70,21 @@ $bignum: 1000px;
     position: absolute;
     li {
       position: absolute;
+      font-weight: bold;
+      color: $charcoal;
+    }
+  }
+
+  #x_axis {
+    bottom: 0;
+    right: 0;
+    height: 75px;
+    margin-right: 35px;
+    li {
+      top: 10px;
+      &.lower { left: 0; }
+      &.upper { right: 0; }
+      &.label { top: 20px; text-align: center; margin: 0 auto; display:block; position: relative}
     }
   }
 
@@ -100,19 +110,6 @@ $bignum: 1000px;
     }      
   }
   
-  #x_axis {
-    bottom: 0;
-    right: 0;
-    height: 75px;
-    margin-right: 35px;
-    li {
-      top: 10px;
-      &.lower { left: 0; }
-      &.upper { right: 0; }
-      &.label { top: 20px; text-align: center; margin: 0 auto; display:block; position: relative}
-    }
-  }
-
   #graph_field {
     position: absolute;
     top: 35px;
@@ -120,27 +117,62 @@ $bignum: 1000px;
     border-bottom: 1px solid $charcoal;
     border-left: 1px solid $charcoal;
   }
+}
 
-  .item {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: #feffc4;
-    border: 1px solid #c4c4c4;
+.thumbnail_container.lg {
+}
+
+.thumbnail.lg {
+  height: 70px;
+}
+
+.item {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #c4c4c4;
+  .thumbnail_container {
+    margin: 0;
+    float: left;
+    background-color: rgba(255, 255, 255, .7);
+    height: 20px;
+    width: 20px;
+    .thumbnail {
+      height: 18px;
+      width: 18px;
+      background-size: 18px auto;
+      background-repeat: no-repeat;
+      background-position: center center;
+      border: 1px solid transparent;
+    }
+  }
+  .bd {
+    display: none;
+  }
+  &.expanded {
+    width: auto;
+    max-width: 450px;
+    height: auto;
     @include box-shadow(0 20px 50px black);
+    z-index: 99;
     .thumbnail_container {
-      margin: 10px;
-      float: left;
       width: 70px;
-      line-height: 1px;
+      height: 70px;
+      margin: 10px;
       .thumbnail {
-        border: 1px solid black;
+        border: 1px solid #c4c4c4;
+        height: 70px;
+        width: 70px;
+        background-size: 70px;
       }
     }
     .bd {
+      margin: 10px 10px 10px 95px;
+      display: block;
       font-family: verdana, arial, helvetica, sans-serif;
       color: #555555;
-      margin: 10px 10px 10px 95px;
       font-size: 10px;
       line-height: 12px;
       a {
@@ -148,6 +180,12 @@ $bignum: 1000px;
         &:hover {
           text-decoration: underline;
         }
+      }
+      a.close {
+        color: #555555;
+        position: absolute;
+        top: 2px;
+        right: 2px;
       }
       a.name {
         font-size: 16px;
@@ -164,8 +202,15 @@ $bignum: 1000px;
       .domain a {
         color: #555555;
       }
-      .comments {
+      .meta a {
+        color: #0000ff;
+        &:visited {
+          color: #0000ff;
+        }
+      }
+      .comments a {
         font-weight: bold;
+        color: #555555;
       }
     }
   }

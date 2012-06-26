@@ -109,81 +109,104 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   background: url("../images/philosoraptor.png") no-repeat left bottom, linear-gradient(top center, #ffffff, #e6e4da);
 }
 
-/* line 45, ../sass/_style.scss */
+/* line 46, ../sass/_style.scss */
 #graph {
   position: absolute;
   top: 0;
   overflow: hidden;
 }
-/* line 49, ../sass/_style.scss */
+/* line 50, ../sass/_style.scss */
 .control_pad_open #graph {
   right: 0;
   border-left: 1px solid #e6e4da;
 }
-/* line 55, ../sass/_style.scss */
-#graph #x_axis li,
-#graph #y_axis li {
-  font-weight: bold;
-  color: #333333;
-}
-/* line 61, ../sass/_style.scss */
+/* line 56, ../sass/_style.scss */
 #graph .lower,
 #graph .upper {
   font-size: 25px;
 }
-/* line 64, ../sass/_style.scss */
+/* line 59, ../sass/_style.scss */
 #graph .label {
   font-size: 30px;
 }
-/* line 66, ../sass/_style.scss */
+/* line 61, ../sass/_style.scss */
 #graph .label .axis_edit {
   display: inline-block;
   margin-left: 10px;
   z-index: 30;
 }
-/* line 74, ../sass/_style.scss */
+/* line 69, ../sass/_style.scss */
 #graph #x_axis,
 #graph #y_axis {
   position: absolute;
 }
-/* line 76, ../sass/_style.scss */
+/* line 71, ../sass/_style.scss */
 #graph #x_axis li,
 #graph #y_axis li {
   position: absolute;
+  font-weight: bold;
+  color: #333333;
 }
-/* line 81, ../sass/_style.scss */
+/* line 78, ../sass/_style.scss */
+#graph #x_axis {
+  bottom: 0;
+  right: 0;
+  height: 75px;
+  margin-right: 35px;
+}
+/* line 83, ../sass/_style.scss */
+#graph #x_axis li {
+  top: 10px;
+}
+/* line 85, ../sass/_style.scss */
+#graph #x_axis li.lower {
+  left: 0;
+}
+/* line 86, ../sass/_style.scss */
+#graph #x_axis li.upper {
+  right: 0;
+}
+/* line 87, ../sass/_style.scss */
+#graph #x_axis li.label {
+  top: 20px;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+  position: relative;
+}
+/* line 91, ../sass/_style.scss */
 #graph #y_axis {
   top: 0;
   left: 0;
   width: 75px;
   margin-top: 35px;
 }
-/* line 86, ../sass/_style.scss */
+/* line 96, ../sass/_style.scss */
 #graph #y_axis li {
   width: 0;
   margin-left: -500px;
   left: 50px;
 }
-/* line 90, ../sass/_style.scss */
+/* line 100, ../sass/_style.scss */
 #graph #y_axis li.lower {
   bottom: 0;
 }
-/* line 91, ../sass/_style.scss */
+/* line 101, ../sass/_style.scss */
 #graph #y_axis li.upper {
   top: 0;
 }
-/* line 92, ../sass/_style.scss */
+/* line 102, ../sass/_style.scss */
 #graph #y_axis li.label {
   top: 50%;
   left: 40px;
   margin-top: -0.5em;
   z-index: 30;
 }
-/* line 93, ../sass/_style.scss */
+/* line 103, ../sass/_style.scss */
 #graph #y_axis li.label span {
   z-index: 30;
 }
-/* line 94, ../sass/_style.scss */
+/* line 104, ../sass/_style.scss */
 #graph #y_axis li span {
   display: inline-block;
   text-align: center;
@@ -194,34 +217,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -o-transform: rotate(-90deg);
   transform: rotate(-90deg);
 }
-/* line 103, ../sass/_style.scss */
-#graph #x_axis {
-  bottom: 0;
-  right: 0;
-  height: 75px;
-  margin-right: 35px;
-}
-/* line 108, ../sass/_style.scss */
-#graph #x_axis li {
-  top: 10px;
-}
-/* line 110, ../sass/_style.scss */
-#graph #x_axis li.lower {
-  left: 0;
-}
-/* line 111, ../sass/_style.scss */
-#graph #x_axis li.upper {
-  right: 0;
-}
-/* line 112, ../sass/_style.scss */
-#graph #x_axis li.label {
-  top: 20px;
-  text-align: center;
-  margin: 0 auto;
-  display: block;
-  position: relative;
-}
-/* line 116, ../sass/_style.scss */
+/* line 113, ../sass/_style.scss */
 #graph #graph_field {
   position: absolute;
   top: 35px;
@@ -229,64 +225,118 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   border-bottom: 1px solid #333333;
   border-left: 1px solid #333333;
 }
-/* line 124, ../sass/_style.scss */
-#graph .item {
+
+/* line 125, ../sass/_style.scss */
+.thumbnail.lg {
+  height: 70px;
+}
+
+/* line 129, ../sass/_style.scss */
+.item {
   position: absolute;
   bottom: 0;
   left: 0;
-  background-color: #feffc4;
+  width: 20px;
+  height: 20px;
   border: 1px solid #c4c4c4;
+}
+/* line 136, ../sass/_style.scss */
+.item .thumbnail_container {
+  margin: 0;
+  float: left;
+  background-color: rgba(255, 255, 255, 0.7);
+  height: 20px;
+  width: 20px;
+}
+/* line 142, ../sass/_style.scss */
+.item .thumbnail_container .thumbnail {
+  height: 18px;
+  width: 18px;
+  background-size: 18px auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 1px solid transparent;
+}
+/* line 151, ../sass/_style.scss */
+.item .bd {
+  display: none;
+}
+/* line 154, ../sass/_style.scss */
+.item.expanded {
+  width: auto;
+  max-width: 450px;
+  height: auto;
   -webkit-box-shadow: 0 20px 50px black;
   -moz-box-shadow: 0 20px 50px black;
   box-shadow: 0 20px 50px black;
+  z-index: 99;
 }
-/* line 131, ../sass/_style.scss */
-#graph .item .thumbnail_container {
-  margin: 10px;
-  float: left;
+/* line 160, ../sass/_style.scss */
+.item.expanded .thumbnail_container {
   width: 70px;
-  line-height: 1px;
+  height: 70px;
+  margin: 10px;
 }
-/* line 136, ../sass/_style.scss */
-#graph .item .thumbnail_container .thumbnail {
-  border: 1px solid black;
+/* line 164, ../sass/_style.scss */
+.item.expanded .thumbnail_container .thumbnail {
+  border: 1px solid #c4c4c4;
+  height: 70px;
+  width: 70px;
+  background-size: 70px;
 }
-/* line 140, ../sass/_style.scss */
-#graph .item .bd {
+/* line 171, ../sass/_style.scss */
+.item.expanded .bd {
+  margin: 10px 10px 10px 95px;
+  display: block;
   font-family: verdana, arial, helvetica, sans-serif;
   color: #555555;
-  margin: 10px 10px 10px 95px;
   font-size: 10px;
   line-height: 12px;
 }
-/* line 146, ../sass/_style.scss */
-#graph .item .bd a {
+/* line 178, ../sass/_style.scss */
+.item.expanded .bd a {
   text-decoration: none;
 }
-/* line 148, ../sass/_style.scss */
-#graph .item .bd a:hover {
+/* line 180, ../sass/_style.scss */
+.item.expanded .bd a:hover {
   text-decoration: underline;
 }
-/* line 152, ../sass/_style.scss */
-#graph .item .bd a.name {
+/* line 184, ../sass/_style.scss */
+.item.expanded .bd a.close {
+  color: #555555;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+/* line 190, ../sass/_style.scss */
+.item.expanded .bd a.name {
   font-size: 16px;
   margin-right: 5px;
   color: #0000ff;
 }
-/* line 156, ../sass/_style.scss */
-#graph .item .bd a.name:hover {
+/* line 194, ../sass/_style.scss */
+.item.expanded .bd a.name:hover {
   text-decoration: none;
 }
-/* line 159, ../sass/_style.scss */
-#graph .item .bd a.name:visited {
+/* line 197, ../sass/_style.scss */
+.item.expanded .bd a.name:visited {
   color: #551a8b;
 }
-/* line 164, ../sass/_style.scss */
-#graph .item .bd .domain,
-#graph .item .bd .domain a {
+/* line 202, ../sass/_style.scss */
+.item.expanded .bd .domain,
+.item.expanded .bd .domain a {
   color: #555555;
 }
-/* line 167, ../sass/_style.scss */
-#graph .item .bd .comments {
+/* line 205, ../sass/_style.scss */
+.item.expanded .bd .meta a {
+  color: #0000ff;
+}
+/* line 207, ../sass/_style.scss */
+.item.expanded .bd .meta a:visited {
+  color: #0000ff;
+}
+/* line 211, ../sass/_style.scss */
+.item.expanded .bd .comments a {
   font-weight: bold;
+  color: #555555;
 }

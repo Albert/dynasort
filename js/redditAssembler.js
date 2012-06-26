@@ -108,3 +108,20 @@ var config = {
     y: "created"
   }
 }
+
+$(function() {
+  $('.item').click(
+    function() {
+      var $this = $(this);
+      if (!$this.hasClass('exanded')) {
+        $('.expanded').removeClass('expanded');
+        $this.addClass('expanded');
+        return false;
+      }
+    }
+  );
+  $('.close').click(function() {
+    $(this).parent().parent().removeClass('expanded');
+    return false;
+  })
+});

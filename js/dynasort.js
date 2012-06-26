@@ -151,8 +151,8 @@ $(document).ready(function() {
     sizeContents();
   });
   sizeContents();
-  rawData.fetch();
-  controllers.init();
-  axes.init();
+  //rawData.fetch();
+  //controllers.init();
+  //axes.init();
 });
 
