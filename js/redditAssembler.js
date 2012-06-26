@@ -78,9 +78,9 @@ viewTemplate = _.template('\
   <div class="thumbnail_container"><a href="<%= url %>" class="thumbnail" style="background-image: url(<%= thumbnail %>);"></a></div>\
   <div class="bd">\
     <a href="#" class="close">[x]</a>\
-    <p class="header"><a href="<%= url %>" class="name"><%= title %></a> <span class="domain">(<a href="<%= domain %>"><%= domain %></a>)</span></p>\
+    <p class="header"><a href="<%= url %>" class="name"><%= title %></a> <span class="domain">(<a href="http://www.reddit.com/domain/<%= domain %>"><%= domain %></a>)</span></p>\
     <p class="meta">Submitted <%= created %> by <a href="http://www.reddit.com/user/<%= author %>"><%= author %></a> to <a href="http://www.reddit.com/r/<%= subreddit %>"><%= subreddit %></a></p>\
-    <p class="comments"><a href="http://www.reddit.com/<%= permalink %>"> comments</a></p>\
+    <p class="comments"><a href="http://www.reddit.com/<%= permalink %>"><%= num_comments %> comment<% if(num_comments != "1") {print("s")} %></a></p>\
   </div>');
 
 $(function() {

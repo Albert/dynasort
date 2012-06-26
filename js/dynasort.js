@@ -23,6 +23,10 @@ var dynasort = {
     this.controllers.build();
     this.points.build();
     this.axes.build();
+    this.points.sort();
+    $('.axis .label span').click(function() {
+      $(this).siblings('select').toggle();
+    });
   },
   points: {
     build: function() {
@@ -32,6 +36,19 @@ var dynasort = {
         itemContainer.html(viewTemplate(item));
         itemContainer.appendTo($graph_field);
       })
+    },
+    sort: function() {
+      $('.item').each(function() {
+        var $this = $(this);
+        var yAxis = $("#y_axis option:selected").val();
+        var xAxis = $("#x_axis option:selected").val();
+        var dataPoint = dataSet.data[$this.attr("id").replace("item_", "")];
+        var pointTop = dataPoint[xAxis];
+        var fullHeight = ("#graph_field").height();
+        var fullWidth = ("#graph_field").width();
+        console.log(pointTop);
+        //$this.css({top: pointTop, left: pointLeft});
+      });
     }
   },
   controllers: {
@@ -58,9 +75,19 @@ var dynasort = {
   axes: {
     build: function() {
       $('.axis').each(function(index){
-        $(this).children('.lower').children('span').html(dataSet.columns[index].range[0]);
-        $(this).children('.label').children('span').children('label').html(dataSet.columns[index].friendlyName);
-        $(this).children('.upper').children('span').html(dataSet.columns[index].range[1]);
+        var $this = $(this);
+        _.each(dataSet.columns, function(column) {
+          if (column.dataType) {
+            var selectedTag = "";
+            if (dataSet.columns[index] == column) {selectedTag = ' selected="selected" ';}
+            $this.find('select').append('<option value="' + column.name + '"' + selectedTag + '>' + column.friendlyName + '</option>');
+          }
+        });
+        $this.find('.lower span' ).html(dataSet.columns[index].range[0]);
+        $this.find('.label label').html(dataSet.columns[index].friendlyName);
+        $this.find('.upper span' ).html(dataSet.columns[index].range[1]);
+        var configPos = $this.find('.label a').css("visibility", "visible").position();
+        $this.find('.label select').css({left: configPos.left + 35, top: configPos.top - 5});
       });
     }
   }

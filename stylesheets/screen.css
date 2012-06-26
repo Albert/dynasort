@@ -167,41 +167,50 @@ html, body, #graph {
 /* line 89, ../sass/_style.scss */
 #graph .label .axis_edit {
   display: inline-block;
+  visibility: hidden;
   margin-left: 10px;
   z-index: 30;
 }
-/* line 97, ../sass/_style.scss */
+/* line 98, ../sass/_style.scss */
 #graph #x_axis,
 #graph #y_axis {
   position: absolute;
 }
-/* line 99, ../sass/_style.scss */
+/* line 100, ../sass/_style.scss */
 #graph #x_axis li,
 #graph #y_axis li {
   position: absolute;
   font-weight: bold;
   color: #333333;
 }
-/* line 106, ../sass/_style.scss */
+/* line 105, ../sass/_style.scss */
+#graph #x_axis select,
+#graph #y_axis select {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
+/* line 113, ../sass/_style.scss */
 #graph #x_axis {
   bottom: 0;
   right: 0;
   height: 75px;
   margin-right: 35px;
 }
-/* line 111, ../sass/_style.scss */
+/* line 118, ../sass/_style.scss */
 #graph #x_axis li {
   top: 10px;
 }
-/* line 113, ../sass/_style.scss */
+/* line 120, ../sass/_style.scss */
 #graph #x_axis li.lower {
   left: 0;
 }
-/* line 114, ../sass/_style.scss */
+/* line 121, ../sass/_style.scss */
 #graph #x_axis li.upper {
   right: 0;
 }
-/* line 115, ../sass/_style.scss */
+/* line 122, ../sass/_style.scss */
 #graph #x_axis li.label {
   top: 20px;
   text-align: center;
@@ -209,39 +218,39 @@ html, body, #graph {
   display: block;
   position: relative;
 }
-/* line 119, ../sass/_style.scss */
+/* line 126, ../sass/_style.scss */
 #graph #y_axis {
   top: 0;
   left: 0;
   width: 75px;
   margin-top: 35px;
 }
-/* line 124, ../sass/_style.scss */
+/* line 131, ../sass/_style.scss */
 #graph #y_axis li {
   width: 0;
   margin-left: -500px;
   left: 50px;
 }
-/* line 128, ../sass/_style.scss */
+/* line 135, ../sass/_style.scss */
 #graph #y_axis li.lower {
   bottom: 0;
 }
-/* line 129, ../sass/_style.scss */
+/* line 136, ../sass/_style.scss */
 #graph #y_axis li.upper {
   top: 0;
 }
-/* line 130, ../sass/_style.scss */
+/* line 137, ../sass/_style.scss */
 #graph #y_axis li.label {
   top: 50%;
   left: 40px;
   margin-top: -0.5em;
   z-index: 30;
 }
-/* line 131, ../sass/_style.scss */
+/* line 138, ../sass/_style.scss */
 #graph #y_axis li.label span {
   z-index: 30;
 }
-/* line 132, ../sass/_style.scss */
+/* line 139, ../sass/_style.scss */
 #graph #y_axis li span {
   display: inline-block;
   text-align: center;
@@ -252,7 +261,7 @@ html, body, #graph {
   -o-transform: rotate(-90deg);
   transform: rotate(-90deg);
 }
-/* line 141, ../sass/_style.scss */
+/* line 148, ../sass/_style.scss */
 #graph #graph_field {
   position: absolute;
   top: 35px;
@@ -261,7 +270,7 @@ html, body, #graph {
   border-left: 1px solid #333333;
 }
 
-/* line 150, ../sass/_style.scss */
+/* line 157, ../sass/_style.scss */
 .item {
   position: absolute;
   bottom: 0;
@@ -270,7 +279,7 @@ html, body, #graph {
   height: 20px;
   border: 1px solid #c4c4c4;
 }
-/* line 157, ../sass/_style.scss */
+/* line 164, ../sass/_style.scss */
 .item .thumbnail_container {
   margin: 0;
   float: left;
@@ -278,7 +287,7 @@ html, body, #graph {
   height: 20px;
   width: 20px;
 }
-/* line 163, ../sass/_style.scss */
+/* line 170, ../sass/_style.scss */
 .item .thumbnail_container .thumbnail {
   display: block;
   height: 18px;
@@ -288,15 +297,15 @@ html, body, #graph {
   background-position: center center;
   border: 1px solid transparent;
 }
-/* line 171, ../sass/_style.scss */
+/* line 178, ../sass/_style.scss */
 .item .thumbnail_container .thumbnail:hover {
   border: 1px solid black;
 }
-/* line 176, ../sass/_style.scss */
+/* line 183, ../sass/_style.scss */
 .item .bd {
   display: none;
 }
-/* line 179, ../sass/_style.scss */
+/* line 186, ../sass/_style.scss */
 .item.expanded {
   width: auto;
   max-width: 450px;
@@ -306,24 +315,24 @@ html, body, #graph {
   box-shadow: 0 20px 50px black;
   z-index: 99;
 }
-/* line 185, ../sass/_style.scss */
+/* line 192, ../sass/_style.scss */
 .item.expanded .thumbnail_container {
   width: 70px;
   height: 70px;
   margin: 10px;
 }
-/* line 189, ../sass/_style.scss */
+/* line 196, ../sass/_style.scss */
 .item.expanded .thumbnail_container .thumbnail {
   border: 1px solid #c4c4c4;
   height: 70px;
   width: 70px;
   background-size: 70px;
 }
-/* line 194, ../sass/_style.scss */
+/* line 201, ../sass/_style.scss */
 .item.expanded .thumbnail_container .thumbnail:hover {
   border: 1px solid black;
 }
-/* line 199, ../sass/_style.scss */
+/* line 206, ../sass/_style.scss */
 .item.expanded .bd {
   margin: 10px 10px 10px 95px;
   display: block;
@@ -332,58 +341,58 @@ html, body, #graph {
   font-size: 10px;
   line-height: 12px;
 }
-/* line 206, ../sass/_style.scss */
+/* line 213, ../sass/_style.scss */
 .item.expanded .bd a {
   text-decoration: none;
 }
-/* line 208, ../sass/_style.scss */
+/* line 215, ../sass/_style.scss */
 .item.expanded .bd a:hover {
   text-decoration: underline;
 }
-/* line 212, ../sass/_style.scss */
+/* line 219, ../sass/_style.scss */
 .item.expanded .bd a.close {
   color: #555555;
   position: absolute;
   top: 2px;
   right: 2px;
 }
-/* line 218, ../sass/_style.scss */
+/* line 225, ../sass/_style.scss */
 .item.expanded .bd a.name {
   font-size: 16px;
   margin-right: 5px;
   color: #0000ff;
 }
-/* line 222, ../sass/_style.scss */
+/* line 229, ../sass/_style.scss */
 .item.expanded .bd a.name:hover {
   text-decoration: none;
 }
-/* line 225, ../sass/_style.scss */
+/* line 232, ../sass/_style.scss */
 .item.expanded .bd a.name:visited {
   color: #551a8b;
 }
-/* line 230, ../sass/_style.scss */
+/* line 237, ../sass/_style.scss */
 .item.expanded .bd .domain,
 .item.expanded .bd .domain a {
   color: #555555;
 }
-/* line 233, ../sass/_style.scss */
+/* line 240, ../sass/_style.scss */
 .item.expanded .bd .meta a {
   color: #0000ff;
 }
-/* line 235, ../sass/_style.scss */
+/* line 242, ../sass/_style.scss */
 .item.expanded .bd .meta a:visited {
   color: #0000ff;
 }
-/* line 239, ../sass/_style.scss */
+/* line 246, ../sass/_style.scss */
 .item.expanded .bd .comments a {
   font-weight: bold;
   color: #555555;
 }
-/* line 246, ../sass/_style.scss */
+/* line 253, ../sass/_style.scss */
 .item.right .thumbnail_container {
   float: right;
 }
-/* line 249, ../sass/_style.scss */
+/* line 256, ../sass/_style.scss */
 .item.right .bd {
   margin: 10px 95px 10px 10px;
 }
