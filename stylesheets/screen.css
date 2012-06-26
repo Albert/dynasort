@@ -250,6 +250,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 142, ../sass/_style.scss */
 .item .thumbnail_container .thumbnail {
+  display: block;
   height: 18px;
   width: 18px;
   background-size: 18px auto;
@@ -257,11 +258,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   background-position: center center;
   border: 1px solid transparent;
 }
-/* line 151, ../sass/_style.scss */
+/* line 150, ../sass/_style.scss */
+.item .thumbnail_container .thumbnail:hover {
+  border: 1px solid black;
+}
+/* line 155, ../sass/_style.scss */
 .item .bd {
   display: none;
 }
-/* line 154, ../sass/_style.scss */
+/* line 158, ../sass/_style.scss */
 .item.expanded {
   width: auto;
   max-width: 450px;
@@ -271,20 +276,24 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   box-shadow: 0 20px 50px black;
   z-index: 99;
 }
-/* line 160, ../sass/_style.scss */
+/* line 164, ../sass/_style.scss */
 .item.expanded .thumbnail_container {
   width: 70px;
   height: 70px;
   margin: 10px;
 }
-/* line 164, ../sass/_style.scss */
+/* line 168, ../sass/_style.scss */
 .item.expanded .thumbnail_container .thumbnail {
   border: 1px solid #c4c4c4;
   height: 70px;
   width: 70px;
   background-size: 70px;
 }
-/* line 171, ../sass/_style.scss */
+/* line 173, ../sass/_style.scss */
+.item.expanded .thumbnail_container .thumbnail:hover {
+  border: 1px solid black;
+}
+/* line 178, ../sass/_style.scss */
 .item.expanded .bd {
   margin: 10px 10px 10px 95px;
   display: block;
@@ -293,50 +302,58 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-size: 10px;
   line-height: 12px;
 }
-/* line 178, ../sass/_style.scss */
+/* line 185, ../sass/_style.scss */
 .item.expanded .bd a {
   text-decoration: none;
 }
-/* line 180, ../sass/_style.scss */
+/* line 187, ../sass/_style.scss */
 .item.expanded .bd a:hover {
   text-decoration: underline;
 }
-/* line 184, ../sass/_style.scss */
+/* line 191, ../sass/_style.scss */
 .item.expanded .bd a.close {
   color: #555555;
   position: absolute;
   top: 2px;
   right: 2px;
 }
-/* line 190, ../sass/_style.scss */
+/* line 197, ../sass/_style.scss */
 .item.expanded .bd a.name {
   font-size: 16px;
   margin-right: 5px;
   color: #0000ff;
 }
-/* line 194, ../sass/_style.scss */
+/* line 201, ../sass/_style.scss */
 .item.expanded .bd a.name:hover {
   text-decoration: none;
 }
-/* line 197, ../sass/_style.scss */
+/* line 204, ../sass/_style.scss */
 .item.expanded .bd a.name:visited {
   color: #551a8b;
 }
-/* line 202, ../sass/_style.scss */
+/* line 209, ../sass/_style.scss */
 .item.expanded .bd .domain,
 .item.expanded .bd .domain a {
   color: #555555;
 }
-/* line 205, ../sass/_style.scss */
+/* line 212, ../sass/_style.scss */
 .item.expanded .bd .meta a {
   color: #0000ff;
 }
-/* line 207, ../sass/_style.scss */
+/* line 214, ../sass/_style.scss */
 .item.expanded .bd .meta a:visited {
   color: #0000ff;
 }
-/* line 211, ../sass/_style.scss */
+/* line 218, ../sass/_style.scss */
 .item.expanded .bd .comments a {
   font-weight: bold;
   color: #555555;
+}
+/* line 225, ../sass/_style.scss */
+.item.right .thumbnail_container {
+  float: right;
+}
+/* line 228, ../sass/_style.scss */
+.item.right .bd {
+  margin: 10px 95px 10px 10px;
 }

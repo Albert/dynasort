@@ -1,6 +1,48 @@
 var dataSet = {};
 var viewTemplate;
 
+function sizeContents() {
+  var winHeight = $(window).height();
+  var winWidth = $(window).width() - $("#control_pad").outerWidth() - 1;
+  $("#graph").height(winHeight);
+  $("#y_axis").height(winHeight - 75 - 35);
+  $("#graph_field").height(winHeight - 75 - 35);
+  $("#graph").width(winWidth);
+  $("#x_axis").width(winWidth - 75 - 35);
+  $("#graph_field").width(winWidth - 75 - 35);
+}
+
+$(document).ready(function() {
+  $(window).resize(function() {
+    sizeContents();
+  });
+  sizeContents();
+  //rawData.fetch();
+  //controllers.init();
+  //axes.init();
+});
+
+var dynasort = {
+  init: function() {
+    this.controllers.build();
+    this.points.build();
+  },
+  points: {
+    build: function() {
+      $graph_field = $('#graph_field');
+      _.each(dataSet.data, function(item, ind) {
+        itemContainer = $('<li id="item' + ind + '" class="item">');
+        itemContainer.html(viewTemplate(item));
+        itemContainer.appendTo($graph_field);
+      })
+    }
+  },
+  controllers: {
+    build: function() {
+      
+    }
+  }
+}
 /*
 
 
@@ -134,25 +176,4 @@ var points = {
 
 
 */
-
-function sizeContents() {
-  var winHeight = $(window).height();
-  var winWidth = $(window).width() - $("#control_pad").outerWidth() - 1;
-  $("#graph").height(winHeight);
-  $("#y_axis").height(winHeight - 75 - 35);
-  $("#graph_field").height(winHeight - 75 - 35);
-  $("#graph").width(winWidth);
-  $("#x_axis").width(winWidth - 75 - 35);
-  $("#graph_field").width(winWidth - 75 - 35);
-}
-
-$(document).ready(function() {
-  $(window).resize(function() {
-    sizeContents();
-  });
-  sizeContents();
-  //rawData.fetch();
-  //controllers.init();
-  //axes.init();
-});
 

@@ -58,69 +58,29 @@ $.getJSON("http://www.reddit.com/.json?jsonp=?&limit=100", function(jsonData) {
     item.rank = ind + 1;
     dataSet.data[ind] = item;
   });
+  dynasort.init();
 });
 
 viewTemplate = _.template('\
-<a href="<%= url %>">\
-  <img src="<%= thumbnail %>" alt="<%= title %>" />\
-  <span class="title"><%= title %></span>\
-</a>\
-comments: <a href="<%= permalink %>" class="comments"><%= num_comments %></a>\
-By <%= author %>');
-
-var config = {
-  jsonPath: "http://www.reddit.com/r/pics.json?jsonp=?&limit=100",
-  jsonDataCollection: "data.children",
-  jsonNodeNest: "data",
-  dataAttributes: {
-    rank: {
-      basedOnIndex: true
-    },
-    subreddit: {
-      type: "string",
-      categorySort: true
-    },
-    created: {
-      friendlyName: "Created At",
-      type: "dateTime",
-      jsonPath: "created_utc"
-    },
-    score: {
-      type: "int"
-    },
-    comments: {
-      friendlyName: "Comment Count",
-      type: "int",
-      jsonPath: "num_comments"
-    }
-  },
-  displayAttributes: {
-    author: {},
-    title: {},
-    thumbnail: {},
-    url: {},
-    permalink: {},
-    num_comments: {}
-  },
-  viewTemplate: viewTemplate,
-  axes: {
-    x: "rank",
-    y: "created"
-  }
-}
+  <div class="thumbnail_container"><a href="<%= url %>" class="thumbnail" style="background-image: url(<%= thumbnail %>);"></a></div>\
+  <div class="bd">\
+    <a href="#" class="close">[x]</a>\
+    <p class="header"><a href="<%= url %>" class="name"><%= title %></a> <span class="domain">(<a href="<%= domain %>"><%= domain %></a>)</span></p>\
+    <p class="meta">Submitted <%= created %> by <a href="http://www.reddit.com/user/<%= author %>"><%= author %></a> to <a href="http://www.reddit.com/r/<%= subreddit %>"><%= subreddit %></a></p>\
+    <p class="comments"><a href="http://www.reddit.com/<%= permalink %>"> comments</a></p>\
+  </div>');
 
 $(function() {
-  $('.item').click(
-    function() {
-      var $this = $(this);
-      if (!$this.hasClass('exanded')) {
-        $('.expanded').removeClass('expanded');
-        $this.addClass('expanded');
-        return false;
-      }
+  $('.thumbnail').live('click', function() {
+    var $item = $(this).parent().parent();
+    console.log($item);
+    if (!$item.hasClass('expanded')) {
+      $('.expanded').removeClass('expanded');
+      $item.addClass('expanded');
+      return false;
     }
-  );
-  $('.close').click(function() {
+  });
+  $('.close').live('click', function() {
     $(this).parent().parent().removeClass('expanded');
     return false;
   })
