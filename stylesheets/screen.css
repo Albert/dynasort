@@ -64,23 +64,29 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 8, ../sass/_style.scss */
+html, body, #graph {
+  height: 100%;
+}
+
+/* line 12, ../sass/_style.scss */
 #control_pad {
+  font-family: helvetica, arial, sans-serif;
   position: absolute;
   top: 0;
   left: 0;
 }
-/* line 12, ../sass/_style.scss */
+/* line 17, ../sass/_style.scss */
 .control_pad_open #control_pad {
   width: 210px;
   padding: 15px 20px;
 }
-/* line 16, ../sass/_style.scss */
+/* line 21, ../sass/_style.scss */
 .control_pad_closed #control_pad {
   width: 0;
   padding-left: 0;
   padding-right: 0;
 }
-/* line 22, ../sass/_style.scss */
+/* line 27, ../sass/_style.scss */
 #control_pad h1 a {
   display: block;
   height: 40px;
@@ -89,7 +95,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-size: 34px;
   line-height: 40px;
   color: #50853a;
-  font-family: helvetica, arial, sans-serif;
   font-weight: bold;
   text-align: center;
   text-decoration: none;
@@ -108,73 +113,95 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   background: url("../images/philosoraptor.png") no-repeat left bottom, -ms-linear-gradient(top center, #ffffff, #e6e4da);
   background: url("../images/philosoraptor.png") no-repeat left bottom, linear-gradient(top center, #ffffff, #e6e4da);
 }
-/* line 44, ../sass/_style.scss */
+/* line 48, ../sass/_style.scss */
+#control_pad #controller_container dt {
+  margin-top: 20px;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+/* line 52, ../sass/_style.scss */
+#control_pad #controller_container dt .range {
+  font-size: 12px;
+  color: #4C3000;
+  font-weight: bold;
+  margin-left: 8px;
+}
+/* line 59, ../sass/_style.scss */
+#control_pad #controller_container dd {
+  margin-bottom: 15px;
+}
+/* line 62, ../sass/_style.scss */
+#control_pad #controller_container #reddit_url_label {
+  padding-left: 30px;
+  background: url("../images/reddit_logo.png") no-repeat left center;
+}
+/* line 66, ../sass/_style.scss */
 #control_pad #controller_container .slider {
   font-size: 12px;
 }
-/* line 46, ../sass/_style.scss */
+/* line 68, ../sass/_style.scss */
 #control_pad #controller_container .slider a {
   outline: none;
 }
 
-/* line 52, ../sass/_style.scss */
+/* line 74, ../sass/_style.scss */
 #graph {
   position: absolute;
   top: 0;
   overflow: hidden;
 }
-/* line 56, ../sass/_style.scss */
+/* line 78, ../sass/_style.scss */
 .control_pad_open #graph {
   right: 0;
   border-left: 1px solid #e6e4da;
 }
-/* line 62, ../sass/_style.scss */
+/* line 84, ../sass/_style.scss */
 #graph .lower,
 #graph .upper {
   font-size: 25px;
 }
-/* line 65, ../sass/_style.scss */
+/* line 87, ../sass/_style.scss */
 #graph .label {
   font-size: 30px;
 }
-/* line 67, ../sass/_style.scss */
+/* line 89, ../sass/_style.scss */
 #graph .label .axis_edit {
   display: inline-block;
   margin-left: 10px;
   z-index: 30;
 }
-/* line 75, ../sass/_style.scss */
+/* line 97, ../sass/_style.scss */
 #graph #x_axis,
 #graph #y_axis {
   position: absolute;
 }
-/* line 77, ../sass/_style.scss */
+/* line 99, ../sass/_style.scss */
 #graph #x_axis li,
 #graph #y_axis li {
   position: absolute;
   font-weight: bold;
   color: #333333;
 }
-/* line 84, ../sass/_style.scss */
+/* line 106, ../sass/_style.scss */
 #graph #x_axis {
   bottom: 0;
   right: 0;
   height: 75px;
   margin-right: 35px;
 }
-/* line 89, ../sass/_style.scss */
+/* line 111, ../sass/_style.scss */
 #graph #x_axis li {
   top: 10px;
 }
-/* line 91, ../sass/_style.scss */
+/* line 113, ../sass/_style.scss */
 #graph #x_axis li.lower {
   left: 0;
 }
-/* line 92, ../sass/_style.scss */
+/* line 114, ../sass/_style.scss */
 #graph #x_axis li.upper {
   right: 0;
 }
-/* line 93, ../sass/_style.scss */
+/* line 115, ../sass/_style.scss */
 #graph #x_axis li.label {
   top: 20px;
   text-align: center;
@@ -182,39 +209,39 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
   position: relative;
 }
-/* line 97, ../sass/_style.scss */
+/* line 119, ../sass/_style.scss */
 #graph #y_axis {
   top: 0;
   left: 0;
   width: 75px;
   margin-top: 35px;
 }
-/* line 102, ../sass/_style.scss */
+/* line 124, ../sass/_style.scss */
 #graph #y_axis li {
   width: 0;
   margin-left: -500px;
   left: 50px;
 }
-/* line 106, ../sass/_style.scss */
+/* line 128, ../sass/_style.scss */
 #graph #y_axis li.lower {
   bottom: 0;
 }
-/* line 107, ../sass/_style.scss */
+/* line 129, ../sass/_style.scss */
 #graph #y_axis li.upper {
   top: 0;
 }
-/* line 108, ../sass/_style.scss */
+/* line 130, ../sass/_style.scss */
 #graph #y_axis li.label {
   top: 50%;
   left: 40px;
   margin-top: -0.5em;
   z-index: 30;
 }
-/* line 109, ../sass/_style.scss */
+/* line 131, ../sass/_style.scss */
 #graph #y_axis li.label span {
   z-index: 30;
 }
-/* line 110, ../sass/_style.scss */
+/* line 132, ../sass/_style.scss */
 #graph #y_axis li span {
   display: inline-block;
   text-align: center;
@@ -225,7 +252,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -o-transform: rotate(-90deg);
   transform: rotate(-90deg);
 }
-/* line 119, ../sass/_style.scss */
+/* line 141, ../sass/_style.scss */
 #graph #graph_field {
   position: absolute;
   top: 35px;
@@ -234,12 +261,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   border-left: 1px solid #333333;
 }
 
-/* line 131, ../sass/_style.scss */
-.thumbnail.lg {
-  height: 70px;
-}
-
-/* line 135, ../sass/_style.scss */
+/* line 150, ../sass/_style.scss */
 .item {
   position: absolute;
   bottom: 0;
@@ -248,7 +270,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   height: 20px;
   border: 1px solid #c4c4c4;
 }
-/* line 142, ../sass/_style.scss */
+/* line 157, ../sass/_style.scss */
 .item .thumbnail_container {
   margin: 0;
   float: left;
@@ -256,7 +278,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   height: 20px;
   width: 20px;
 }
-/* line 148, ../sass/_style.scss */
+/* line 163, ../sass/_style.scss */
 .item .thumbnail_container .thumbnail {
   display: block;
   height: 18px;
@@ -266,15 +288,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   background-position: center center;
   border: 1px solid transparent;
 }
-/* line 156, ../sass/_style.scss */
+/* line 171, ../sass/_style.scss */
 .item .thumbnail_container .thumbnail:hover {
   border: 1px solid black;
 }
-/* line 161, ../sass/_style.scss */
+/* line 176, ../sass/_style.scss */
 .item .bd {
   display: none;
 }
-/* line 164, ../sass/_style.scss */
+/* line 179, ../sass/_style.scss */
 .item.expanded {
   width: auto;
   max-width: 450px;
@@ -284,24 +306,24 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   box-shadow: 0 20px 50px black;
   z-index: 99;
 }
-/* line 170, ../sass/_style.scss */
+/* line 185, ../sass/_style.scss */
 .item.expanded .thumbnail_container {
   width: 70px;
   height: 70px;
   margin: 10px;
 }
-/* line 174, ../sass/_style.scss */
+/* line 189, ../sass/_style.scss */
 .item.expanded .thumbnail_container .thumbnail {
   border: 1px solid #c4c4c4;
   height: 70px;
   width: 70px;
   background-size: 70px;
 }
-/* line 179, ../sass/_style.scss */
+/* line 194, ../sass/_style.scss */
 .item.expanded .thumbnail_container .thumbnail:hover {
   border: 1px solid black;
 }
-/* line 184, ../sass/_style.scss */
+/* line 199, ../sass/_style.scss */
 .item.expanded .bd {
   margin: 10px 10px 10px 95px;
   display: block;
@@ -310,58 +332,58 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-size: 10px;
   line-height: 12px;
 }
-/* line 191, ../sass/_style.scss */
+/* line 206, ../sass/_style.scss */
 .item.expanded .bd a {
   text-decoration: none;
 }
-/* line 193, ../sass/_style.scss */
+/* line 208, ../sass/_style.scss */
 .item.expanded .bd a:hover {
   text-decoration: underline;
 }
-/* line 197, ../sass/_style.scss */
+/* line 212, ../sass/_style.scss */
 .item.expanded .bd a.close {
   color: #555555;
   position: absolute;
   top: 2px;
   right: 2px;
 }
-/* line 203, ../sass/_style.scss */
+/* line 218, ../sass/_style.scss */
 .item.expanded .bd a.name {
   font-size: 16px;
   margin-right: 5px;
   color: #0000ff;
 }
-/* line 207, ../sass/_style.scss */
+/* line 222, ../sass/_style.scss */
 .item.expanded .bd a.name:hover {
   text-decoration: none;
 }
-/* line 210, ../sass/_style.scss */
+/* line 225, ../sass/_style.scss */
 .item.expanded .bd a.name:visited {
   color: #551a8b;
 }
-/* line 215, ../sass/_style.scss */
+/* line 230, ../sass/_style.scss */
 .item.expanded .bd .domain,
 .item.expanded .bd .domain a {
   color: #555555;
 }
-/* line 218, ../sass/_style.scss */
+/* line 233, ../sass/_style.scss */
 .item.expanded .bd .meta a {
   color: #0000ff;
 }
-/* line 220, ../sass/_style.scss */
+/* line 235, ../sass/_style.scss */
 .item.expanded .bd .meta a:visited {
   color: #0000ff;
 }
-/* line 224, ../sass/_style.scss */
+/* line 239, ../sass/_style.scss */
 .item.expanded .bd .comments a {
   font-weight: bold;
   color: #555555;
 }
-/* line 231, ../sass/_style.scss */
+/* line 246, ../sass/_style.scss */
 .item.right .thumbnail_container {
   float: right;
 }
-/* line 234, ../sass/_style.scss */
+/* line 249, ../sass/_style.scss */
 .item.right .bd {
   margin: 10px 95px 10px 10px;
 }

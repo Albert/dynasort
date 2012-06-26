@@ -4,7 +4,6 @@ var viewTemplate;
 function sizeContents() {
   var winHeight = $(window).height();
   var winWidth = $(window).width() - $("#control_pad").outerWidth() - 1;
-  $("#graph").height(winHeight);
   $("#y_axis").height(winHeight - 75 - 35);
   $("#graph_field").height(winHeight - 75 - 35);
   $("#graph").width(winWidth);
@@ -17,15 +16,13 @@ $(document).ready(function() {
     sizeContents();
   });
   sizeContents();
-  //rawData.fetch();
-  //controllers.init();
-  //axes.init();
 });
 
 var dynasort = {
   init: function() {
     this.controllers.build();
     this.points.build();
+    this.axes.build();
   },
   points: {
     build: function() {
@@ -55,6 +52,15 @@ var dynasort = {
             }
           });
         }
+      });
+    }
+  },
+  axes: {
+    build: function() {
+      $('.axis').each(function(index){
+        $(this).children('.lower').children('span').html(dataSet.columns[index].range[0]);
+        $(this).children('.label').children('span').children('label').html(dataSet.columns[index].friendlyName);
+        $(this).children('.upper').children('span').html(dataSet.columns[index].range[1]);
       });
     }
   }
