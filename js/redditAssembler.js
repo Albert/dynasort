@@ -6,8 +6,8 @@ dataSet.columns = [
   },
   {
     name: "created",
-    friendlyName: "Age of Post",
-    dataType: "number"
+    friendlyName: "Submitted",
+    dataType: "dateTime"
   },
   {
     name: "score",
@@ -16,7 +16,7 @@ dataSet.columns = [
   },
   {
     name: "num_comments",
-    friendlyName: "# of Comments",
+    friendlyName: "Comments",
     dataType: "number"
   },
   {
@@ -45,6 +45,7 @@ dataSet.columns = [
   }
 ]
 $.getJSON("http://www.reddit.com/.json?jsonp=?&limit=100", function(jsonData) {
+  // Populate dataSet.data
   dataSet.data = [];
   _.each(jsonData.data.children, function(rawItem, ind) {
     var item = {};
@@ -57,6 +58,18 @@ $.getJSON("http://www.reddit.com/.json?jsonp=?&limit=100", function(jsonData) {
     });
     item.rank = ind + 1;
     dataSet.data[ind] = item;
+  });
+
+  // Make add min and max to dataSet.columns
+  _.each(dataSet.columns, function(column) {
+    if (column.dataType) {
+      var range = [dataSet.data[0][column.name], dataSet.data[0][column.name]];
+      _.each(dataSet.data, function(item) {
+        if (item[column.name] < range[0]) {range[0] = item[column.name]};
+        if (item[column.name] > range[1]) {range[1] = item[column.name]};
+      });
+      column.range = range;
+    }
   });
   dynasort.init();
 });

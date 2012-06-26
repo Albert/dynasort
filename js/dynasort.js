@@ -31,7 +31,7 @@ var dynasort = {
     build: function() {
       $graph_field = $('#graph_field');
       _.each(dataSet.data, function(item, ind) {
-        itemContainer = $('<li id="item' + ind + '" class="item">');
+        itemContainer = $('<li id="item_' + ind + '" class="item">');
         itemContainer.html(viewTemplate(item));
         itemContainer.appendTo($graph_field);
       })
@@ -39,10 +39,29 @@ var dynasort = {
   },
   controllers: {
     build: function() {
-      
+      $controller_container = $('#controller_container');
+      _.each(dataSet.columns, function(column) {
+        if (column.dataType) {
+          $('<dt>' + column.friendlyName + ':<span id="' + column.name + '_range" class="range">' + column.range[0] + ' - ' + column.range[1] + '</span></dt>').appendTo($controller_container);
+          colMin = 0;
+          colMax = 100;
+          $('<dd id="' + column.name + '_slider" class="slider">').appendTo($controller_container).slider({
+            range: true,
+            min: column.range[0],
+            max: column.range[1],
+            values: column.range,
+            slide: function(event, ui) {
+              $('#' + column.name + '_range').html(ui.values[0] + ' - ' + ui.values[1]);
+            }
+          });
+        }
+      });
     }
   }
 }
+
+
+
 /*
 
 

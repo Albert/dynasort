@@ -40,6 +40,12 @@ $bignum: 1000px;
       linear-gradient(top center, white, $beige)
     );
   }
+  #controller_container {
+    .slider {
+      font-size: 12px;
+      a {outline: none;}
+    }
+  }
 }
 
 
