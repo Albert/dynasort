@@ -5,7 +5,7 @@ dataSet.columns = [
     dataType: "number"
   },
   {
-    name: "created",
+    name: "created_utc",
     friendlyName: "Submitted",
     dataType: "dateTime"
   },
@@ -90,7 +90,7 @@ viewTemplate = _.template('\
   <div class="bd">\
     <a href="#" class="close">[x]</a>\
     <p class="header"><a href="<%= url %>" class="name"><%= title %></a> <span class="domain">(<a href="http://www.reddit.com/domain/<%= domain %>"><%= domain %></a>)</span></p>\
-    <p class="meta">Submitted <%= created %> by <a href="http://www.reddit.com/user/<%= author %>"><%= author %></a> to <a href="http://www.reddit.com/r/<%= subreddit %>"><%= subreddit %></a></p>\
+    <p class="meta">Submitted <span class="time_ago"><%= created_utc %></span> by <a href="http://www.reddit.com/user/<%= author %>"><%= author %></a> to <a href="http://www.reddit.com/r/<%= subreddit %>"><%= subreddit %></a></p>\
     <p class="comments"><a href="http://www.reddit.com/<%= permalink %>"><%= num_comments %> comment<% if(num_comments != "1") {print("s")} %></a></p>\
   </div>');
 

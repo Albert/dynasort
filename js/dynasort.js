@@ -1,6 +1,13 @@
 var dataSet = {};
 var viewTemplate;
 
+jQuery.timeago.settings.refreshMillis = 0;
+jQuery.timeago.settings.strings.minute = "a minute";
+jQuery.timeago.settings.strings.hour   = "an hour";
+jQuery.timeago.settings.strings.hours  = "%d hours";
+jQuery.timeago.settings.strings.month  = "a month";
+jQuery.timeago.settings.strings.year   = "a year";
+
 function sizeContents() {
   var winHeight = $(window).height();
   var winWidth = $(window).width() - $("#control_pad").outerWidth() - 1;
@@ -104,6 +111,12 @@ var dynasort = {
               var matchedCol = _.find(dataSet.columns, function(dataSetColumn) {
                 return dataSetColumn == column;
               });
+              var matchedAxis = _.find(dynasort.axes, function(axis) {
+                return axis.dataDim == column;
+              });
+              if (matchedAxis) {
+                matchedAxis.setRange(column);
+              }
               matchedCol.range = ui.values;
               dynasort.points.filter();
               dynasort.points.sort();
@@ -151,8 +164,21 @@ function Axis(displayDim, dataDimName) {
   }
 
   this.setRange = function(dataDim) {
-    this.domEl.find('.lower span' ).html(dataDim.range[0]);
-    this.domEl.find('.upper span' ).html(dataDim.range[1]);
+    var lowerContainer = this.domEl.children('.lower');
+    var upperContainer = this.domEl.children('.upper');
+    upperContainer.children('span').remove().end().append($("<span>"));;
+    lowerContainer.children('span').remove().end().append($("<span>"));
+    var lower = this.domEl.find('.lower span');
+    var upper = this.domEl.find('.upper span');
+    lower.html(dataDim.range[0]);
+    upper.html(dataDim.range[1]);
+    if (dataDim.dataType == "dateTime") {
+      lower.attr("title", new Date(lower.html() * 1000).toISOString()).html(lower.attr('title')).timeago();
+      upper.attr("title", new Date(upper.html() * 1000).toISOString()).html(upper.attr('title')).timeago();
+    } else {
+      lower.attr("title", "");
+      upper.attr("title", "");
+    }
   }
 
   this.changeTo = function(newDataDimName) {
