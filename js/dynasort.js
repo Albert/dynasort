@@ -9,9 +9,10 @@ function sizeContents() {
   $("#graph").width(winWidth);
   $("#x_axis").width(winWidth - 75 - 35);
   $("#graph_field").width(winWidth - 75 - 35);
+  dynasort.points.sort();
 }
 
-$(document).ready(function() {
+$(function() {
   $(window).resize(function() {
     sizeContents();
   });
@@ -22,11 +23,17 @@ var dynasort = {
   init: function() {
     this.controllers.build();
     this.points.build();
-    this.axes.build();
-    this.points.sort();
     $('.axis .label span').click(function() {
       $(this).siblings('select').toggle();
     });
+    xAxis = new Axis("x", dataSet.columns[1].name);
+    yAxis = new Axis("y", dataSet.columns[3].name);
+    dynasort.axes.push(xAxis);
+    dynasort.axes.push(yAxis);
+    _.each(dynasort.axes, function(axis) {
+      axis.build();
+    });
+    this.points.sort();
   },
   points: {
     build: function() {
@@ -38,17 +45,45 @@ var dynasort = {
       })
     },
     sort: function() {
+      _.each(dynasort.axes, function(axis) {
+        var furthest, axisCssProp;
+        if (axis.displayDim == "x") {
+          furthest = $("#graph_field").width() - 20;
+          axisCssProp = "left";
+        } else {
+          furthest = $("#graph_field").height() - 20;
+          axisCssProp = "bottom";
+        }
+        $('.item').each(function() {
+          var $this = $(this);
+          var dataPoint = dataSet.data[$this.attr("id").replace("item_", "")];
+          var axisCssVal = furthest * (dataPoint[axis.dataDim.name] - axis.dataDim.range[0]) / (axis.dataDim.range[1] - axis.dataDim.range[0]);
+          var animationEnd = {};
+          animationEnd[axisCssProp] = axisCssVal;
+          $this.css(animationEnd);
+        });
+      });
       $('.item').each(function() {
         var $this = $(this);
-        var yAxis = $("#y_axis option:selected").val();
-        var xAxis = $("#x_axis option:selected").val();
         var dataPoint = dataSet.data[$this.attr("id").replace("item_", "")];
-        var pointTop = dataPoint[xAxis];
-        var fullHeight = ("#graph_field").height();
-        var fullWidth = ("#graph_field").width();
-        console.log(pointTop);
-        //$this.css({top: pointTop, left: pointLeft});
+        _.each(dataSet.columns, function(column) {
+          if (column.dataType) {
+            if (dataPoint[column.name] >= column.range[0] && dataPoint[column.name] <= column.range[1]) {
+              dataPoint.visibleBy[column.name] = true;
+            } else {
+              dataPoint.visibleBy[column.name] = false;
+            }
+          }
+        });
+        if (_.all(dataPoint.visibleBy, _.identity)) {
+          $this.show();
+        } else {
+          $this.hide();
+        }
       });
+    },
+    filter: function() {
+      _.each(dataSet.columns, function(column){});
     }
   },
   controllers: {
@@ -66,34 +101,47 @@ var dynasort = {
             values: column.range,
             slide: function(event, ui) {
               $('#' + column.name + '_range').html(ui.values[0] + ' - ' + ui.values[1]);
+              var matchedCol = _.find(dataSet.columns, function(dataSetColumn) {
+                return dataSetColumn == column;
+              });
+              matchedCol.range = ui.values;
+              dynasort.points.filter();
+              dynasort.points.sort();
+              // update display range?
+              // update corresponding axes[]
+              // update points -- filter some out
             }
           });
         }
       });
     }
   },
-  axes: {
-    build: function() {
-      $('.axis').each(function(index){
-        var $this = $(this);
-        _.each(dataSet.columns, function(column) {
-          if (column.dataType) {
-            var selectedTag = "";
-            if (dataSet.columns[index] == column) {selectedTag = ' selected="selected" ';}
-            $this.find('select').append('<option value="' + column.name + '"' + selectedTag + '>' + column.friendlyName + '</option>');
-          }
-        });
-        $this.find('.lower span' ).html(dataSet.columns[index].range[0]);
-        $this.find('.label label').html(dataSet.columns[index].friendlyName);
-        $this.find('.upper span' ).html(dataSet.columns[index].range[1]);
-        var configPos = $this.find('.label a').css("visibility", "visible").position();
-        $this.find('.label select').css({left: configPos.left + 35, top: configPos.top - 5});
-      });
-    }
-  }
+
+  axes: []
 }
 
+function Axis(displayDim, dataDimName) {
+  this.displayDim = displayDim;
+  this.dataDim = _.find(dataSet.columns, function(column) {return column.name == dataDimName});
+  this.domEl = $("#" + this.displayDim + "_axis");
 
+  this.build = function() {
+    var $this = this.domEl;
+    var dataDim = this.dataDim;
+    _.each(dataSet.columns, function(column) {
+      if (column.dataType) {
+        var selectedTag = "";
+        if (dataDim == column) {selectedTag = ' selected="selected" ';} 
+        $this.find('select').append('<option value="' + column.name + '"' + selectedTag + '>' + column.friendlyName + '</option>');
+      }
+    });
+    $this.find('.lower span' ).html(dataDim.range[0]);
+    $this.find('.label label').html(dataDim.friendlyName);
+    $this.find('.upper span' ).html(dataDim.range[1]);
+    var configPos = $this.find('.label a').css("visibility", "visible").position();
+    $this.find('.label select').css({left: configPos.left + 35, top: configPos.top - 5});
+  }
+}
 
 /*
 

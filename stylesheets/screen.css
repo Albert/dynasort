@@ -132,7 +132,7 @@ html, body, #graph {
 }
 /* line 62, ../sass/_style.scss */
 #control_pad #controller_container #reddit_url_label {
-  padding-left: 30px;
+  padding-left: 25px;
   background: url("../images/reddit_logo.png") no-repeat left center;
 }
 /* line 66, ../sass/_style.scss */

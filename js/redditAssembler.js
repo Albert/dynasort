@@ -44,6 +44,7 @@ dataSet.columns = [
     name: "is_self"
   }
 ]
+
 $.getJSON("http://www.reddit.com/.json?jsonp=?&limit=100", function(jsonData) {
   // Populate dataSet.data
   dataSet.data = [];
@@ -56,6 +57,7 @@ $.getJSON("http://www.reddit.com/.json?jsonp=?&limit=100", function(jsonData) {
     _.each(propertiesToFind, function(property) {
       item[property] = rawItem.data[property];
     });
+    item.visibleBy = {};
     item.rank = ind + 1;
     dataSet.data[ind] = item;
   });
