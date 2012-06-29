@@ -107,9 +107,6 @@ var dynasort = {
               matchedCol.range = ui.values;
               dynasort.points.filter();
               dynasort.points.sort();
-              // update display range?
-              // update corresponding axes[]
-              // update points -- filter some out
             }
           });
         }
@@ -128,6 +125,7 @@ function Axis(displayDim, dataDimName) {
   this.build = function() {
     var $this = this.domEl;
     var dataDim = this.dataDim;
+    // build out selects
     _.each(dataSet.columns, function(column) {
       if (column.dataType) {
         var selectedTag = "";
@@ -135,11 +133,31 @@ function Axis(displayDim, dataDimName) {
         $this.find('select').append('<option value="' + column.name + '"' + selectedTag + '>' + column.friendlyName + '</option>');
       }
     });
-    $this.find('.lower span' ).html(dataDim.range[0]);
-    $this.find('.label label').html(dataDim.friendlyName);
-    $this.find('.upper span' ).html(dataDim.range[1]);
-    var configPos = $this.find('.label a').css("visibility", "visible").position();
-    $this.find('.label select').css({left: configPos.left + 35, top: configPos.top - 5});
+    this.setDataDim(dataDim);
+    var axisInstance = this;
+    $this.find('select').change(function() {
+      var $this = $(this);
+      $this.hide();
+      axisInstance.changeTo($this.val());
+    });
+  }
+
+  this.setDataDim = function(dataDim) {
+    this.domEl.find('label').html(dataDim.friendlyName);
+    var configPos = this.domEl.find('.label a').css("visibility", "visible").position();
+    this.domEl.find('select').css({left: configPos.left + 35, top: configPos.top - 5});
+    dynasort.points.sort();
+    this.setRange(dataDim);
+  }
+
+  this.setRange = function(dataDim) {
+    this.domEl.find('.lower span' ).html(dataDim.range[0]);
+    this.domEl.find('.upper span' ).html(dataDim.range[1]);
+  }
+
+  this.changeTo = function(newDataDimName) {
+    this.dataDim = _.find(dataSet.columns, function(column) {return column.name == newDataDimName});
+    this.setDataDim(this.dataDim);
   }
 }
 
