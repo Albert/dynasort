@@ -39,13 +39,11 @@ dataSet.columns = [
   },
   {
     name: "url"
-  },
-  {
-    name: "is_self"
   }
 ]
-
+var debugJson = {};
 $.getJSON("http://www.reddit.com/.json?jsonp=?&limit=100", function(jsonData) {
+  debugJson = jsonData;
   // Populate dataSet.data
   dataSet.data = [];
   _.each(jsonData.data.children, function(rawItem, ind) {
@@ -59,6 +57,17 @@ $.getJSON("http://www.reddit.com/.json?jsonp=?&limit=100", function(jsonData) {
     });
     item.visibleBy = {};
     item.rank = ind + 1;
+    if (item.thumbnail == "") {
+      if (rawItem.data.over_18) {
+        item.thumbnail = "images/nsfw.png";
+      } else if (rawItem.data.is_self) {
+        item.thumbnail = "images/self.png";
+      } else {
+        item.thumbnail = "images/missing.png";
+      }
+    } else if (item.thumbnail == "default") {
+      item.thumbnail = "images/missing.png";
+    }
     dataSet.data[ind] = item;
   });
 

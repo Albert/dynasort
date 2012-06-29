@@ -27,7 +27,7 @@ var dynasort = {
       $(this).siblings('select').toggle();
     });
     xAxis = new Axis("x", dataSet.columns[1].name);
-    yAxis = new Axis("y", dataSet.columns[3].name);
+    yAxis = new Axis("y", dataSet.columns[0].name);
     dynasort.axes.push(xAxis);
     dynasort.axes.push(yAxis);
     _.each(dynasort.axes, function(axis) {
