@@ -67,6 +67,8 @@ $.getJSON("http://www.reddit.com/r/pics.json?jsonp=?&limit=100", function(jsonDa
       }
     } else if (item.thumbnail == "default") {
       item.thumbnail = "images/missing.png";
+    } else if (item.thumbnail == "nsfw") {
+      item.thumbnail = "images/nsfw.png";
     }
     dataSet.data[ind] = item;
   });
