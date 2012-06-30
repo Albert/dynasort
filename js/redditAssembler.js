@@ -42,7 +42,7 @@ dataSet.columns = [
   }
 ]
 var debugJson = {};
-$.getJSON("http://www.reddit.com/.json?jsonp=?&limit=100", function(jsonData) {
+$.getJSON("http://www.reddit.com/r/pics.json?jsonp=?&limit=100", function(jsonData) {
   debugJson = jsonData;
   // Populate dataSet.data
   dataSet.data = [];

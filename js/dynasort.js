@@ -98,7 +98,15 @@ var dynasort = {
       $controller_container = $('#controller_container');
       _.each(dataSet.columns, function(column) {
         if (column.dataType) {
-          $('<dt>' + column.friendlyName + ':<span id="' + column.name + '_range" class="range">' + column.range[0] + ' - ' + column.range[1] + '</span></dt>').appendTo($controller_container);
+          var controllerTitle = $('<dt>' + column.friendlyName + ':<span id="' + column.name + '_range" class="range"></span></dt>');
+          if (column.dataType == "dateTime") {
+            controllerTitle.children('span').append($('<span class="from"></span> - <span class="to"></span>'));
+            controllerTitle.find('.from').attr("title", new Date(column.range[0] * 1000).toISOString()).html(controllerTitle.find('.from').attr('title')).timeago();
+            controllerTitle.find('.to'  ).attr("title", new Date(column.range[1] * 1000).toISOString()).html(controllerTitle.find('.to').attr('title')).timeago();
+          } else {
+            controllerTitle.children('span').html(column.range[0] + ' - ' + column.range[1]);
+          }
+          controllerTitle.appendTo($controller_container);
           colMin = 0;
           colMax = 100;
           $('<dd id="' + column.name + '_slider" class="slider">').appendTo($controller_container).slider({
@@ -107,17 +115,26 @@ var dynasort = {
             max: column.range[1],
             values: column.range,
             slide: function(event, ui) {
-              $('#' + column.name + '_range').html(ui.values[0] + ' - ' + ui.values[1]);
+              if (column.dataType == "dateTime") {
+                var displayValues = [];
+                var rangeDisplay = $('#' + column.name + '_range');
+                rangeDisplay.empty().append($('<span class="from"></span> - <span class="to"></span>'));
+                rangeDisplay.children('.from').attr("title", new Date(ui.values[0] * 1000).toISOString()).html(rangeDisplay.children('.from').attr('title')).timeago();
+                rangeDisplay.children('.to'  ).attr("title", new Date(ui.values[1] * 1000).toISOString()).html(rangeDisplay.children('.to').attr('title')).timeago();
+                //rangeDisplay.html(displayValues[0] + ' - ' + displayValues[1]);
+              } else {
+                $('#' + column.name + '_range').html(ui.values[0] + ' - ' + ui.values[1]);
+              }
               var matchedCol = _.find(dataSet.columns, function(dataSetColumn) {
                 return dataSetColumn == column;
               });
               var matchedAxis = _.find(dynasort.axes, function(axis) {
                 return axis.dataDim == column;
               });
+              matchedCol.range = ui.values;
               if (matchedAxis) {
                 matchedAxis.setRange(column);
               }
-              matchedCol.range = ui.values;
               dynasort.points.filter();
               dynasort.points.sort();
             }
@@ -166,7 +183,7 @@ function Axis(displayDim, dataDimName) {
   this.setRange = function(dataDim) {
     var lowerContainer = this.domEl.children('.lower');
     var upperContainer = this.domEl.children('.upper');
-    upperContainer.children('span').remove().end().append($("<span>"));;
+    upperContainer.children('span').remove().end().append($("<span>"));
     lowerContainer.children('span').remove().end().append($("<span>"));
     var lower = this.domEl.find('.lower span');
     var upper = this.domEl.find('.upper span');
