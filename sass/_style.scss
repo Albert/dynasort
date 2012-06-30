@@ -132,10 +132,18 @@ html, body, #graph {
       width: 0;
       margin-left: -($bignum/2);
       left: 50px;
+      &.lower,
+      &.upper {
+        z-index: -1;
+        span {
+          z-index: -1;
+        }
+      }
       &.lower { bottom: 0; }
       &.upper { top: 0;    }
-      &.label { top: 50%; left: 40px; margin-top: -.5em; z-index: 30; }
+      &.label { top: 50%; left: 40px; margin-top: -.5em; }
       &.label span { z-index: 30; }
+      &.label select { z-index: 30; }
       span {
         display: inline-block;
         text-align: center;
@@ -161,6 +169,7 @@ html, body, #graph {
   width: 20px;
   height: 20px;
   border: 1px solid #c4c4c4;
+  z-index: 2;
   .thumbnail_container {
     margin: 0;
     float: left;

@@ -231,26 +231,37 @@ html, body, #graph {
   margin-left: -500px;
   left: 50px;
 }
-/* line 135, ../sass/_style.scss */
+/* line 136, ../sass/_style.scss */
+#graph #y_axis li.lower, #graph #y_axis li.upper {
+  z-index: -1;
+}
+/* line 138, ../sass/_style.scss */
+#graph #y_axis li.lower span, #graph #y_axis li.upper span {
+  z-index: -1;
+}
+/* line 142, ../sass/_style.scss */
 #graph #y_axis li.lower {
   bottom: 0;
 }
-/* line 136, ../sass/_style.scss */
+/* line 143, ../sass/_style.scss */
 #graph #y_axis li.upper {
   top: 0;
 }
-/* line 137, ../sass/_style.scss */
+/* line 144, ../sass/_style.scss */
 #graph #y_axis li.label {
   top: 50%;
   left: 40px;
   margin-top: -0.5em;
-  z-index: 30;
 }
-/* line 138, ../sass/_style.scss */
+/* line 145, ../sass/_style.scss */
 #graph #y_axis li.label span {
   z-index: 30;
 }
-/* line 139, ../sass/_style.scss */
+/* line 146, ../sass/_style.scss */
+#graph #y_axis li.label select {
+  z-index: 30;
+}
+/* line 147, ../sass/_style.scss */
 #graph #y_axis li span {
   display: inline-block;
   text-align: center;
@@ -261,7 +272,7 @@ html, body, #graph {
   -o-transform: rotate(-90deg);
   transform: rotate(-90deg);
 }
-/* line 148, ../sass/_style.scss */
+/* line 156, ../sass/_style.scss */
 #graph #graph_field {
   position: absolute;
   top: 35px;
@@ -270,7 +281,7 @@ html, body, #graph {
   border-left: 1px solid #333333;
 }
 
-/* line 157, ../sass/_style.scss */
+/* line 165, ../sass/_style.scss */
 .item {
   position: absolute;
   bottom: 0;
@@ -278,8 +289,9 @@ html, body, #graph {
   width: 20px;
   height: 20px;
   border: 1px solid #c4c4c4;
+  z-index: 2;
 }
-/* line 164, ../sass/_style.scss */
+/* line 173, ../sass/_style.scss */
 .item .thumbnail_container {
   margin: 0;
   float: left;
@@ -287,7 +299,7 @@ html, body, #graph {
   height: 20px;
   width: 20px;
 }
-/* line 170, ../sass/_style.scss */
+/* line 179, ../sass/_style.scss */
 .item .thumbnail_container .thumbnail {
   display: block;
   height: 18px;
@@ -297,15 +309,15 @@ html, body, #graph {
   background-position: center center;
   border: 1px solid transparent;
 }
-/* line 178, ../sass/_style.scss */
+/* line 187, ../sass/_style.scss */
 .item .thumbnail_container .thumbnail:hover {
   border: 1px solid black;
 }
-/* line 183, ../sass/_style.scss */
+/* line 192, ../sass/_style.scss */
 .item .bd {
   display: none;
 }
-/* line 186, ../sass/_style.scss */
+/* line 195, ../sass/_style.scss */
 .item.expanded {
   width: auto;
   max-width: 450px;
@@ -316,24 +328,24 @@ html, body, #graph {
   background-color: white;
   z-index: 99;
 }
-/* line 193, ../sass/_style.scss */
+/* line 202, ../sass/_style.scss */
 .item.expanded .thumbnail_container {
   width: 70px;
   height: 70px;
   margin: 10px;
 }
-/* line 197, ../sass/_style.scss */
+/* line 206, ../sass/_style.scss */
 .item.expanded .thumbnail_container .thumbnail {
   border: 1px solid #c4c4c4;
   height: 70px;
   width: 70px;
   background-size: 70px;
 }
-/* line 202, ../sass/_style.scss */
+/* line 211, ../sass/_style.scss */
 .item.expanded .thumbnail_container .thumbnail:hover {
   border: 1px solid black;
 }
-/* line 207, ../sass/_style.scss */
+/* line 216, ../sass/_style.scss */
 .item.expanded .bd {
   margin: 10px 10px 10px 95px;
   display: block;
@@ -342,58 +354,58 @@ html, body, #graph {
   font-size: 10px;
   line-height: 12px;
 }
-/* line 214, ../sass/_style.scss */
+/* line 223, ../sass/_style.scss */
 .item.expanded .bd a {
   text-decoration: none;
 }
-/* line 216, ../sass/_style.scss */
+/* line 225, ../sass/_style.scss */
 .item.expanded .bd a:hover {
   text-decoration: underline;
 }
-/* line 220, ../sass/_style.scss */
+/* line 229, ../sass/_style.scss */
 .item.expanded .bd a.close {
   color: #555555;
   position: absolute;
   top: 2px;
   right: 2px;
 }
-/* line 226, ../sass/_style.scss */
+/* line 235, ../sass/_style.scss */
 .item.expanded .bd a.name {
   font-size: 16px;
   margin-right: 5px;
   color: #0000ff;
 }
-/* line 230, ../sass/_style.scss */
+/* line 239, ../sass/_style.scss */
 .item.expanded .bd a.name:hover {
   text-decoration: none;
 }
-/* line 233, ../sass/_style.scss */
+/* line 242, ../sass/_style.scss */
 .item.expanded .bd a.name:visited {
   color: #551a8b;
 }
-/* line 238, ../sass/_style.scss */
+/* line 247, ../sass/_style.scss */
 .item.expanded .bd .domain,
 .item.expanded .bd .domain a {
   color: #555555;
 }
-/* line 241, ../sass/_style.scss */
+/* line 250, ../sass/_style.scss */
 .item.expanded .bd .meta a {
   color: #0000ff;
 }
-/* line 243, ../sass/_style.scss */
+/* line 252, ../sass/_style.scss */
 .item.expanded .bd .meta a:visited {
   color: #0000ff;
 }
-/* line 247, ../sass/_style.scss */
+/* line 256, ../sass/_style.scss */
 .item.expanded .bd .comments a {
   font-weight: bold;
   color: #555555;
 }
-/* line 254, ../sass/_style.scss */
+/* line 263, ../sass/_style.scss */
 .item.right .thumbnail_container {
   float: right;
 }
-/* line 257, ../sass/_style.scss */
+/* line 266, ../sass/_style.scss */
 .item.right .bd {
   margin: 10px 95px 10px 10px;
 }
