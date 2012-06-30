@@ -41,6 +41,18 @@ var dynasort = {
       axis.build();
     });
     this.points.sort();
+    $('body').append('<div id="tooltip"><div class="wrap"><span class="clickToExpand">(Click to expand)</span><p></p><?div></div>');
+    $('.item').tooltip({
+      tip: "#tooltip"
+    });
+    $('#graph_field').on("hover", ".item", function() {
+      $('#tooltip p').replaceWith($(this).find('.header').clone());
+      if ($(this).hasClass('expanded')) {
+        $('#tooltip .wrap').addClass('hidden');
+      } else {
+        $('#tooltip .hidden').removeClass('hidden');
+      }
+    });
   },
   points: {
     build: function() {
@@ -50,11 +62,9 @@ var dynasort = {
         itemContainer.html(viewTemplate(item));
         itemContainer.appendTo($graph_field);
       })
-      $('body').append('<div id="tooltip"><span class="clickToExpand">(Click to expand)</span><p></p></div>');
-      $('.item').hover(function() {
-        $('#tooltip p').replaceWith($(this).find('.header').clone());
-      }).tooltip({
-        tip: "#tooltip"
+      $('.time_ago').each(function($el) {
+        var $this = $(this);
+        $this.attr("title", new Date($this.html() * 1000).toISOString()).timeago();
       });
     },
     sort: function() {

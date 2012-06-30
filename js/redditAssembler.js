@@ -42,7 +42,7 @@ dataSet.columns = [
   }
 ]
 var debugJson = {};
-$.getJSON("http://www.reddit.com/r/pics.json?jsonp=?&limit=100", function(jsonData) {
+$.getJSON("http://www.reddit.com/.json?jsonp=?&limit=100", function(jsonData) {
   debugJson = jsonData;
   // Populate dataSet.data
   dataSet.data = [];
@@ -65,6 +65,8 @@ $.getJSON("http://www.reddit.com/r/pics.json?jsonp=?&limit=100", function(jsonDa
       } else {
         item.thumbnail = "images/missing.png";
       }
+    } else if (item.thumbnail == "self") {
+      item.thumbnail = "images/self.png";
     } else if (item.thumbnail == "default") {
       item.thumbnail = "images/missing.png";
     } else if (item.thumbnail == "nsfw") {
