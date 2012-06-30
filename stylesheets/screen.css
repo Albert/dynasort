@@ -313,26 +313,27 @@ html, body, #graph {
   -webkit-box-shadow: 0 20px 50px black;
   -moz-box-shadow: 0 20px 50px black;
   box-shadow: 0 20px 50px black;
+  background-color: white;
   z-index: 99;
 }
-/* line 192, ../sass/_style.scss */
+/* line 193, ../sass/_style.scss */
 .item.expanded .thumbnail_container {
   width: 70px;
   height: 70px;
   margin: 10px;
 }
-/* line 196, ../sass/_style.scss */
+/* line 197, ../sass/_style.scss */
 .item.expanded .thumbnail_container .thumbnail {
   border: 1px solid #c4c4c4;
   height: 70px;
   width: 70px;
   background-size: 70px;
 }
-/* line 201, ../sass/_style.scss */
+/* line 202, ../sass/_style.scss */
 .item.expanded .thumbnail_container .thumbnail:hover {
   border: 1px solid black;
 }
-/* line 206, ../sass/_style.scss */
+/* line 207, ../sass/_style.scss */
 .item.expanded .bd {
   margin: 10px 10px 10px 95px;
   display: block;
@@ -341,58 +342,58 @@ html, body, #graph {
   font-size: 10px;
   line-height: 12px;
 }
-/* line 213, ../sass/_style.scss */
+/* line 214, ../sass/_style.scss */
 .item.expanded .bd a {
   text-decoration: none;
 }
-/* line 215, ../sass/_style.scss */
+/* line 216, ../sass/_style.scss */
 .item.expanded .bd a:hover {
   text-decoration: underline;
 }
-/* line 219, ../sass/_style.scss */
+/* line 220, ../sass/_style.scss */
 .item.expanded .bd a.close {
   color: #555555;
   position: absolute;
   top: 2px;
   right: 2px;
 }
-/* line 225, ../sass/_style.scss */
+/* line 226, ../sass/_style.scss */
 .item.expanded .bd a.name {
   font-size: 16px;
   margin-right: 5px;
   color: #0000ff;
 }
-/* line 229, ../sass/_style.scss */
+/* line 230, ../sass/_style.scss */
 .item.expanded .bd a.name:hover {
   text-decoration: none;
 }
-/* line 232, ../sass/_style.scss */
+/* line 233, ../sass/_style.scss */
 .item.expanded .bd a.name:visited {
   color: #551a8b;
 }
-/* line 237, ../sass/_style.scss */
+/* line 238, ../sass/_style.scss */
 .item.expanded .bd .domain,
 .item.expanded .bd .domain a {
   color: #555555;
 }
-/* line 240, ../sass/_style.scss */
+/* line 241, ../sass/_style.scss */
 .item.expanded .bd .meta a {
   color: #0000ff;
 }
-/* line 242, ../sass/_style.scss */
+/* line 243, ../sass/_style.scss */
 .item.expanded .bd .meta a:visited {
   color: #0000ff;
 }
-/* line 246, ../sass/_style.scss */
+/* line 247, ../sass/_style.scss */
 .item.expanded .bd .comments a {
   font-weight: bold;
   color: #555555;
 }
-/* line 253, ../sass/_style.scss */
+/* line 254, ../sass/_style.scss */
 .item.right .thumbnail_container {
   float: right;
 }
-/* line 256, ../sass/_style.scss */
+/* line 257, ../sass/_style.scss */
 .item.right .bd {
   margin: 10px 95px 10px 10px;
 }

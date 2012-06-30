@@ -188,6 +188,7 @@ html, body, #graph {
     max-width: 450px;
     height: auto;
     @include box-shadow(0 20px 50px black);
+    background-color: white;
     z-index: 99;
     .thumbnail_container {
       width: 70px;
