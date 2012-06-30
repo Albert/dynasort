@@ -50,6 +50,12 @@ var dynasort = {
         itemContainer.html(viewTemplate(item));
         itemContainer.appendTo($graph_field);
       })
+      $('body').append('<div id="tooltip"><span class="clickToExpand">(Click to expand)</span><p></p></div>');
+      $('.item').hover(function() {
+        $('#tooltip p').replaceWith($(this).find('.header').clone());
+      }).tooltip({
+        tip: "#tooltip"
+      });
     },
     sort: function() {
       _.each(dynasort.axes, function(axis) {

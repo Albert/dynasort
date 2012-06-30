@@ -409,3 +409,8 @@ html, body, #graph {
 .item.right .bd {
   margin: 10px 95px 10px 10px;
 }
+
+/* line 272, ../sass/_style.scss */
+#tooltip {
+  display: none;
+}
