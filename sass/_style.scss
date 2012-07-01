@@ -195,7 +195,8 @@ html, body, #graph {
     display: none;
   }
   &.expanded {
-    width: 450px;
+    width: auto;
+    max-width: 450px;
     height: auto;
     @include box-shadow(0 20px 50px black);
     background-color: white;
@@ -213,13 +214,6 @@ html, body, #graph {
           border: 1px solid black;
         }        
       }
-    }
-    &.left .thumbnail_container {
-      float: right;
-      margin-right: 20px;
-    }
-    &.left .bd {
-      margin: 10px 95px 10px 10px;
     }
     .bd {
       margin: 10px 20px 10px 95px;
