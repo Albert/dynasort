@@ -101,15 +101,22 @@ viewTemplate = _.template('\
 $(function() {
   $('.thumbnail').live('click', function() {
     var $item = $(this).parent().parent();
-    console.log($item);
     if (!$item.hasClass('expanded')) {
-      $('.expanded').removeClass('expanded');
+      $('.expanded').removeClass('expanded').removeClass('left').css('left', $(this).data('nonExpandedLeft'));
+      if ($item.position().left > $('#graph_field').width()-450) {
+        $item.addClass('left');
+        $item.data('nonExpandedLeft', $item.position().left);
+        $item.css('right', 0);
+        console.log($item.position().left);
+        console.log($item.width());
+        $item.css('left', 'auto');
+      }
       $item.addClass('expanded');
       return false;
     }
   });
   $('.close').live('click', function() {
-    $(this).parent().parent().removeClass('expanded');
+    $(this).parent().parent().removeClass('expanded').removeClass('left').css('left', $(this).data('nonExpandedLeft'));
     return false;
   })
 });

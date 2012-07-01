@@ -324,8 +324,7 @@ html, body, #graph {
 }
 /* line 197, ../sass/_style.scss */
 .item.expanded {
-  width: auto;
-  max-width: 450px;
+  width: 450px;
   height: auto;
   -webkit-box-shadow: 0 20px 50px black;
   -moz-box-shadow: 0 20px 50px black;
@@ -333,89 +332,98 @@ html, body, #graph {
   background-color: white;
   z-index: 99;
 }
-/* line 204, ../sass/_style.scss */
+/* line 203, ../sass/_style.scss */
 .item.expanded .thumbnail_container {
   width: 70px;
   height: 70px;
   margin: 10px;
 }
-/* line 208, ../sass/_style.scss */
+/* line 207, ../sass/_style.scss */
 .item.expanded .thumbnail_container .thumbnail {
   border: 1px solid #c4c4c4;
   height: 70px;
   width: 70px;
   background-size: 70px;
 }
-/* line 213, ../sass/_style.scss */
+/* line 212, ../sass/_style.scss */
 .item.expanded .thumbnail_container .thumbnail:hover {
   border: 1px solid black;
 }
-/* line 218, ../sass/_style.scss */
+/* line 217, ../sass/_style.scss */
+.item.expanded.left .thumbnail_container {
+  float: right;
+  margin-right: 20px;
+}
+/* line 221, ../sass/_style.scss */
+.item.expanded.left .bd {
+  margin: 10px 95px 10px 10px;
+}
+/* line 224, ../sass/_style.scss */
 .item.expanded .bd {
-  margin: 10px 10px 10px 95px;
+  margin: 10px 20px 10px 95px;
   display: block;
   font-family: verdana, arial, helvetica, sans-serif;
   color: #555555;
   font-size: 10px;
   line-height: 12px;
 }
-/* line 225, ../sass/_style.scss */
+/* line 231, ../sass/_style.scss */
 .item.expanded .bd a {
   text-decoration: none;
 }
-/* line 227, ../sass/_style.scss */
+/* line 233, ../sass/_style.scss */
 .item.expanded .bd a:hover {
   text-decoration: underline;
 }
-/* line 231, ../sass/_style.scss */
+/* line 237, ../sass/_style.scss */
 .item.expanded .bd a.close {
   color: #555555;
   position: absolute;
   top: 2px;
   right: 2px;
 }
-/* line 237, ../sass/_style.scss */
+/* line 243, ../sass/_style.scss */
 .item.expanded .bd a.name {
   font-size: 16px;
   margin-right: 5px;
   color: #0000ff;
 }
-/* line 241, ../sass/_style.scss */
+/* line 247, ../sass/_style.scss */
 .item.expanded .bd a.name:hover {
   text-decoration: none;
 }
-/* line 244, ../sass/_style.scss */
+/* line 250, ../sass/_style.scss */
 .item.expanded .bd a.name:visited {
   color: #551a8b;
 }
-/* line 249, ../sass/_style.scss */
+/* line 255, ../sass/_style.scss */
 .item.expanded .bd .domain,
 .item.expanded .bd .domain a {
   color: #555555;
 }
-/* line 252, ../sass/_style.scss */
+/* line 258, ../sass/_style.scss */
 .item.expanded .bd .meta a {
   color: #0000ff;
 }
-/* line 254, ../sass/_style.scss */
+/* line 260, ../sass/_style.scss */
 .item.expanded .bd .meta a:visited {
   color: #0000ff;
 }
-/* line 258, ../sass/_style.scss */
+/* line 264, ../sass/_style.scss */
 .item.expanded .bd .comments a {
   font-weight: bold;
   color: #555555;
 }
-/* line 265, ../sass/_style.scss */
+/* line 271, ../sass/_style.scss */
 .item.right .thumbnail_container {
   float: right;
 }
-/* line 268, ../sass/_style.scss */
+/* line 274, ../sass/_style.scss */
 .item.right .bd {
   margin: 10px 95px 10px 10px;
 }
 
-/* line 274, ../sass/_style.scss */
+/* line 280, ../sass/_style.scss */
 #tooltip {
   display: none;
 }
