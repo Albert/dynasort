@@ -102,13 +102,20 @@ $(function() {
   $('.thumbnail').live('click', function() {
     var $item = $(this).parent().parent();
     if (!$item.hasClass('expanded')) {
-      $('.expanded').removeClass('expanded').css('left', $(this).data('nonExpandedLeft'));
+      $('.expanded').removeClass('expanded').
+        css('left', $(this).data('nonExpandedLeft')).
+        css('bottom', $(this).data('nonExpandedTop'));
+      $item.addClass('expanded');
       if ($item.position().left > $('#graph_field').width()-450) {
         $item.data('nonExpandedLeft', $item.position().left);
         $item.css('right', 0);
         $item.css('left', 'auto');
       }
-      $item.addClass('expanded');
+      if ($item.position().top < 0) {
+        $item.data('nonExpandedTop', $item.position().top);
+        $item.css('top', 0);
+        $item.css('bottom', 'auto');
+      }
       return false;
     }
   });
