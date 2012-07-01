@@ -97,30 +97,3 @@ viewTemplate = _.template('\
     <p class="meta">Submitted <span class="time_ago"><%= created_utc %></span> by <a href="http://www.reddit.com/user/<%= author %>"><%= author %></a> to <a href="http://www.reddit.com/r/<%= subreddit %>"><%= subreddit %></a></p>\
     <p class="comments"><a href="http://www.reddit.com/<%= permalink %>"><%= num_comments %> comment<% if(num_comments != "1") {print("s")} %></a></p>\
   </div>');
-
-$(function() {
-  $('.thumbnail').live('click', function() {
-    var $item = $(this).parent().parent();
-    if (!$item.hasClass('expanded')) {
-      $('.expanded').removeClass('expanded').
-        css('left', $(this).data('nonExpandedLeft')).
-        css('bottom', $(this).data('nonExpandedTop'));
-      $item.addClass('expanded');
-      if ($item.position().left > $('#graph_field').width()-450) {
-        $item.data('nonExpandedLeft', $item.position().left);
-        $item.css('right', 0);
-        $item.css('left', 'auto');
-      }
-      if ($item.position().top < 0) {
-        $item.data('nonExpandedTop', $item.position().top);
-        $item.css('top', 0);
-        $item.css('bottom', 'auto');
-      }
-      return false;
-    }
-  });
-  $('.close').live('click', function() {
-    $(this).parent().parent().removeClass('expanded').css('left', $(this).data('nonExpandedLeft'));
-    return false;
-  })
-});

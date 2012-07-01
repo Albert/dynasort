@@ -418,4 +418,9 @@ html, body, #graph {
 /* line 274, ../sass/_style.scss */
 #tooltip {
   display: none;
+  background-color: #ffa;
+  border: 1px solid #cc9;
+  padding: 3px;
+  font-size: 13px;
+  z-index: 900;
 }
