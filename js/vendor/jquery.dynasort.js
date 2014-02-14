@@ -8,9 +8,9 @@
     },
     show : function( ) {
     },
-    hide : function( ) { 
+    hide : function( ) {
     },
-    update : function( ) { 
+    update : function( ) {
     }
   };
 
