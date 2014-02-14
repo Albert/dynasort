@@ -1,50 +1,62 @@
+// GLOBALS SHARED WITH redditAssembler
 var dataSet = {};
 var viewTemplate;
-
-jQuery.timeago.settings.refreshMillis = 0;
-jQuery.timeago.settings.strings.minute = "a minute";
-jQuery.timeago.settings.strings.hour   = "an hour";
-jQuery.timeago.settings.strings.hours  = "%d hours";
-jQuery.timeago.settings.strings.month  = "a month";
-jQuery.timeago.settings.strings.year   = "a year";
-
-function sizeContents() {
-  var winHeight = $(window).height();
-  var winWidth = $(window).width() - $("#control_pad").outerWidth() - 1;
-  $("#y_axis").height(winHeight - 75 - 35);
-  $("#graph_field").height(winHeight - 75 - 35);
-  $("#graph").width(winWidth);
-  $("#x_axis").width(winWidth - 75 - 35);
-  $("#graph_field").width(winWidth - 75 - 35);
-  dynasort.points.sort();
-}
-
-$(function() {
-  $(window).resize(function() {
-    sizeContents();
-  });
-  sizeContents();
-});
+//////
 
 var dynasort = {
   init: function() {
     this.controllers.build();
     this.points.build();
-    $('.axis .label span').click(function() {
-      $(this).siblings('select').toggle();
+
+    this.createAxes();
+    this.addTooltips();
+
+    this.bindResizeContents();
+  },
+
+  bindResizeContents: function() {
+    this.resizeContents();
+
+    var self = this;
+    $(window).resize(function() {
+      self.resizeContents();
     });
-    xAxis = new Axis("x", dataSet.columns[1].name);
-    yAxis = new Axis("y", dataSet.columns[0].name);
+  },
+
+  resizeContents: function() {
+    var winHeight = $(window).height();
+    var winWidth = $(window).width() - $("#control_pad").outerWidth() - 1;
+    $("#y_axis").height(winHeight - 75 - 35);
+    $("#graph_field").height(winHeight - 75 - 35);
+    $("#graph").width(winWidth);
+    $("#x_axis").width(winWidth - 75 - 35);
+    $("#graph_field").width(winWidth - 75 - 35);
+    this.points.sort();
+  },
+
+  createAxes: function() {
+    var xAxis = new Axis("x", dataSet.columns[1].name);
+    var yAxis = new Axis("y", dataSet.columns[0].name);
+
     dynasort.axes.push(xAxis);
     dynasort.axes.push(yAxis);
+
     _.each(dynasort.axes, function(axis) {
       axis.build();
     });
-    this.points.sort();
+
+    // bind wrench menu
+    $('.axis .label span').click(function() {
+      $(this).siblings('select').toggle();
+    });
+  },
+
+  addTooltips: function() {
     $('body').append('<div id="tooltip"><div class="wrap"><span class="clickToExpand">(Click to expand)</span><p></p><?div></div>');
     $('.item').tooltip({
       tip: "#tooltip"
     });
+
     $('#graph_field').on("hover", ".item", function() {
       $('#tooltip p').replaceWith($(this).find('.header').clone());
       if ($(this).hasClass('expanded')) {
@@ -54,7 +66,9 @@ var dynasort = {
       }
     });
   },
+
   points: {
+    // Pull out graph_field, its used all over
     build: function() {
       $graph_field = $('#graph_field');
       _.each(dataSet.data, function(item, ind) {
@@ -66,6 +80,8 @@ var dynasort = {
         var $this = $(this);
         $this.attr("title", new Date($this.html() * 1000).toISOString()).timeago();
       });
+
+      // live is removed in newer jquery, use on
       $('.item').live('click', function() {
         var $item = $(this);
         if (!$item.hasClass('expanded')) {
@@ -187,59 +203,3 @@ var dynasort = {
   axes: []
 }
 
-function Axis(displayDim, dataDimName) {
-  this.displayDim = displayDim;
-  this.dataDim = _.find(dataSet.columns, function(column) {return column.name == dataDimName});
-  this.domEl = $("#" + this.displayDim + "_axis");
-
-  this.build = function() {
-    var $this = this.domEl;
-    var dataDim = this.dataDim;
-    // build out selects
-    _.each(dataSet.columns, function(column) {
-      if (column.dataType) {
-        var selectedTag = "";
-        if (dataDim == column) {selectedTag = ' selected="selected" ';} 
-        $this.find('select').append('<option value="' + column.name + '"' + selectedTag + '>' + column.friendlyName + '</option>');
-      }
-    });
-    this.setDataDim(dataDim);
-    var axisInstance = this;
-    $this.find('select').change(function() {
-      var $this = $(this);
-      $this.hide();
-      axisInstance.changeTo($this.val());
-    });
-  }
-
-  this.setDataDim = function(dataDim) {
-    this.domEl.find('label').html(dataDim.friendlyName);
-    var configPos = this.domEl.find('.label a').css("visibility", "visible").position();
-    this.domEl.find('select').css({left: configPos.left + 35, top: configPos.top - 5});
-    dynasort.points.sort();
-    this.setRange(dataDim);
-  }
-
-  this.setRange = function(dataDim) {
-    var lowerContainer = this.domEl.children('.lower');
-    var upperContainer = this.domEl.children('.upper');
-    upperContainer.children('span').remove().end().append($("<span>"));
-    lowerContainer.children('span').remove().end().append($("<span>"));
-    var lower = this.domEl.find('.lower span');
-    var upper = this.domEl.find('.upper span');
-    lower.html(dataDim.range[0]);
-    upper.html(dataDim.range[1]);
-    if (dataDim.dataType == "dateTime") {
-      lower.attr("title", new Date(lower.html() * 1000).toISOString()).html(lower.attr('title')).timeago();
-      upper.attr("title", new Date(upper.html() * 1000).toISOString()).html(upper.attr('title')).timeago();
-    } else {
-      lower.attr("title", "");
-      upper.attr("title", "");
-    }
-  }
-
-  this.changeTo = function(newDataDimName) {
-    this.dataDim = _.find(dataSet.columns, function(column) {return column.name == newDataDimName});
-    this.setDataDim(this.dataDim);
-  }
-}
